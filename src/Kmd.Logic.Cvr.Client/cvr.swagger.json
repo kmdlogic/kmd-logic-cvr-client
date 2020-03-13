@@ -1,0 +1,722 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "KMD Logic CVR Service Service API"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/cvr/by-cvr/{cvr}": {
+      "get": {
+        "tags": [
+          "Cvr"
+        ],
+        "summary": "Gets Company information by CVR number",
+        "operationId": "GetByCvr",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Logic subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "cvr",
+            "in": "path",
+            "description": "CVR number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationId",
+            "in": "query",
+            "description": "Identifier that represents CVR environment and associated configuration which this request will be sent with.",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "CvrConfiguration"
+        ],
+        "summary": "Retrieves CVR configuration assigned to the logic subscription",
+        "operationId": "GetCvrConfiguration",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CvrProviderConfigurationModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations": {
+      "get": {
+        "tags": [
+          "CvrConfiguration"
+        ],
+        "summary": "Retrieves all CVR configurations assigned to the logic subscription",
+        "operationId": "GetAllCvrConfigurations",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CvrProviderConfigurationModel"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/data-distributor": {
+      "post": {
+        "tags": [
+          "DataDistributorCvrConfiguration"
+        ],
+        "summary": "Adds new CVR configuration and uploads certificate file to the Azure Key Vault",
+        "operationId": "CreateDataDistributorCvrConfiguration",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "environment",
+            "in": "formData",
+            "type": "string",
+            "enum": [
+              "Production",
+              "Test"
+            ]
+          },
+          {
+            "name": "certificate",
+            "in": "formData",
+            "type": "file"
+          },
+          {
+            "name": "certificatePassword",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CvrProviderConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/data-distributor/{configurationId}": {
+      "put": {
+        "tags": [
+          "DataDistributorCvrConfiguration"
+        ],
+        "summary": "Adds or updates existing cvr configuration and uploads certificate file to the Azure Key Vault",
+        "operationId": "UpdateDataDistributorCvrConfiguration",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "environment",
+            "in": "formData",
+            "type": "string",
+            "enum": [
+              "Production",
+              "Test"
+            ]
+          },
+          {
+            "name": "certificate",
+            "in": "formData",
+            "type": "file"
+          },
+          {
+            "name": "certificatePassword",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CvrProviderConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/fake-provider": {
+      "post": {
+        "tags": [
+          "FakeProviderConfiguration"
+        ],
+        "operationId": "CreateFakeProviderConfiguration",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CvrFakeProviderConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/fake-provider/{configurationId}": {
+      "put": {
+        "tags": [
+          "FakeProviderConfiguration"
+        ],
+        "operationId": "UpdateFakeProviderConfiguration",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CvrFakeProviderConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/service-platform": {
+      "post": {
+        "tags": [
+          "ServicePlatformConfiguration"
+        ],
+        "operationId": "CreateServicePlatformConfiguration",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "environment",
+            "in": "formData",
+            "type": "string",
+            "enum": [
+              "Production",
+              "Test"
+            ]
+          },
+          {
+            "name": "certificate",
+            "in": "formData",
+            "type": "file"
+          },
+          {
+            "name": "certificatePassword",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "municipalityCvr",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicePlatformCvrProviderConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/service-platform/{configurationId}": {
+      "put": {
+        "tags": [
+          "ServicePlatformConfiguration"
+        ],
+        "operationId": "UpdateServicePlatformConfiguration",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "environment",
+            "in": "formData",
+            "type": "string",
+            "enum": [
+              "Production",
+              "Test"
+            ]
+          },
+          {
+            "name": "certificate",
+            "in": "formData",
+            "type": "file"
+          },
+          {
+            "name": "certificatePassword",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "municipalityCvr",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicePlatformCvrProviderConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CvrAddress": {
+      "type": "object",
+      "properties": {
+        "streetCode": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "houseNumber": {
+          "type": "string"
+        },
+        "communityCode": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "postDistrict": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Company": {
+      "type": "object",
+      "properties": {
+        "cvrNumber": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "eMailAddress": {
+          "type": "string"
+        },
+        "mainBusinessCode": {
+          "type": "string"
+        },
+        "mainBusinessDescription": {
+          "type": "string"
+        },
+        "businessTypeCode": {
+          "type": "string"
+        },
+        "dataProvider": {
+          "type": "string"
+        },
+        "cvrAddress": {
+          "$ref": "#/definitions/CvrAddress"
+        }
+      }
+    },
+    "CvrProviderConfigurationModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "certificateFileName": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        }
+      }
+    },
+    "CvrProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "certificateFileName": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Test"
+          ]
+        }
+      }
+    },
+    "CvrFakeProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "certificateFileName": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Test"
+          ]
+        }
+      }
+    },
+    "ServicePlatformCvrProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "municipalityCvr": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "certificateFileName": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Test"
+          ]
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "name": "Authorization",
+      "in": "header",
+      "type": "apiKey",
+      "description": "Standard Authorization header using the Bearer scheme. <b>Example: \"bearer {token}\".</b> You can obtain that value from your browser Developer tools"
+    }
+  }
+}

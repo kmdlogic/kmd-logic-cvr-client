@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E81352D1-241F-48EA-8E7D-E870C4D7CF66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{BE679503-6645-41D4-9571-917951A36B12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fake", "fake", "{E4CC60C1-CCA3-49ED-9B23-9672D4C10327}"
+	ProjectSection(SolutionItems) = preProject
+		fake\allowed_cvr.json = fake\allowed_cvr.json
+		fake\cvr_35533729.json = fake\cvr_35533729.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client", "src\Kmd.Logic.Cvr.Client\Kmd.Logic.Cvr.Client.csproj", "{63DDA49B-BF5B-4C7B-B850-42016761AA53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{CFEB0CA5-9990-4A4F-85EC-37189A0659F0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		CHANGES.md = CHANGES.md
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+		setup.ps1 = setup.ps1
+		setup.sh = setup.sh
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client.Sample", "sample\Kmd.Logic.Cvr.Client.Sample\Kmd.Logic.Cvr.Client.Sample.csproj", "{DCF57759-D612-48F9-A128-5F535FEAACC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63DDA49B-BF5B-4C7B-B850-42016761AA53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DDA49B-BF5B-4C7B-B850-42016761AA53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DDA49B-BF5B-4C7B-B850-42016761AA53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DDA49B-BF5B-4C7B-B850-42016761AA53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF57759-D612-48F9-A128-5F535FEAACC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF57759-D612-48F9-A128-5F535FEAACC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF57759-D612-48F9-A128-5F535FEAACC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF57759-D612-48F9-A128-5F535FEAACC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63DDA49B-BF5B-4C7B-B850-42016761AA53} = {E81352D1-241F-48EA-8E7D-E870C4D7CF66}
+		{DCF57759-D612-48F9-A128-5F535FEAACC6} = {BE679503-6645-41D4-9571-917951A36B12}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01EC960E-D271-4AA9-B851-506435298812}
+	EndGlobalSection
+EndGlobal
