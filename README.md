@@ -4,7 +4,7 @@ A dotnet client library for accessing the Danish CVR register via the Logic plat
 
 ## How to use this client library
 
-In projects or components where you need to access the register, add a NuGet package reference to [Kmd.Logic.Cvr.Client](https://nuget-link-goes-here).
+In projects or components where you need to access the register, add a NuGet package reference to [Kmd.Logic.Cvr.Client](https://www.nuget.org/packages/Kmd.Logic.Cvr.Client/).
 
 The simplest example to get a company details is:
 
