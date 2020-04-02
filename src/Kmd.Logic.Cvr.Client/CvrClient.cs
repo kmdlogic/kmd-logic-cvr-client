@@ -93,6 +93,72 @@ namespace Kmd.Logic.Cvr.Client
         }
 
         /// <summary>
+        /// Get the production units of a company from the CVR register.
+        /// </summary>
+        /// <param name="cvr">The Production unit number.</param>
+        /// <returns>The list of production units of the company.</returns>
+        /// <exception cref="ValidationException">Missing cvr number.</exception>
+        /// <exception cref="SerializationException">Unable process the service response.</exception>
+        /// <exception cref="LogicTokenProviderException">Unable to issue an authorization token.</exception>
+        /// <exception cref="CvrConfigurationException">Invalid CVR configuration details.</exception>
+        public async Task<IList<ProductionUnit>> GetProductionUnitsAsync(string cvr)
+        {
+            var client = this.CreateClient();
+            using (var response = await client.GetProductionUnitByCvrWithHttpMessagesAsync(
+                                subscriptionId: this.options.SubscriptionId,
+                                cvr: cvr,
+                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return (IList<ProductionUnit>)response.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+
+                    default:
+                        throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
+                }
+            }
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Get the production unit detail from the CVR register.
+        /// </summary>
+        /// <param name="pNumber">The Production unit number.</param>
+        /// <returns>The production unit detail.</returns>
+        /// <exception cref="ValidationException">Missing cvr number.</exception>
+        /// <exception cref="SerializationException">Unable process the service response.</exception>
+        /// <exception cref="LogicTokenProviderException">Unable to issue an authorization token.</exception>
+        /// <exception cref="CvrConfigurationException">Invalid CVR configuration details.</exception>
+        public async Task<ProductionUnitDetail> GetProductionUnitDetailAsync(string pNumber)
+        {
+            var client = this.CreateClient();
+            using (var response = await client.GetProductionUnitDetailByPNumberWithHttpMessagesAsync(
+                                subscriptionId: this.options.SubscriptionId,
+                                pNumber: pNumber,
+                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return (ProductionUnitDetail)response.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+
+                    default:
+                        throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
+                }
+            }
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Gets or Intialize the instance of the <see cref="KMDLogicCVRServiceAPI"/> class.
         /// </summary>
         /// <returns>The instance of KMDLogicCVRServiceServiceAPI.</returns>

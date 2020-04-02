@@ -24,10 +24,6 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// Initializes a new instance of the CvrFakeProviderConfiguration
         /// class.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="subscriptionId"></param>
-        /// <param name="name"></param>
-        /// <param name="certificateFileName"></param>
         /// <param name="environment">Possible values include: 'Production',
         /// 'Test'</param>
         public CvrFakeProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string))

@@ -42,6 +42,27 @@ namespace Kmd.Logic.Cvr.Client
 
 
         /// <summary>
+        /// Gets Production unit detail by production unit number
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Logic subscription ID
+        /// </param>
+        /// <param name='pNumber'>
+        /// Production unit number
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier that represents CVR environment and associated
+        /// configuration which this request will be sent with.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetProductionUnitDetailByPNumberWithHttpMessagesAsync(System.Guid subscriptionId, string pNumber, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Gets Company information by CVR number
         /// </summary>
         /// <param name='subscriptionId'>
@@ -61,6 +82,27 @@ namespace Kmd.Logic.Cvr.Client
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<object>> GetByCvrWithHttpMessagesAsync(System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets Production Units information by CVR number
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Logic subscription ID
+        /// </param>
+        /// <param name='cvr'>
+        /// CVR number
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier that represents CVR environment and associated
+        /// configuration which this request will be sent with.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetProductionUnitByCvrWithHttpMessagesAsync(System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves CVR configuration assigned to the logic subscription
