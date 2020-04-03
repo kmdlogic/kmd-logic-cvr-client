@@ -75,8 +75,6 @@ namespace Kmd.Logic.Cvr.Client
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
             }
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -114,15 +112,10 @@ namespace Kmd.Logic.Cvr.Client
                     case System.Net.HttpStatusCode.OK:
                         return (IList<ProductionUnit>)response.Body;
 
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
-
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
             }
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -147,15 +140,10 @@ namespace Kmd.Logic.Cvr.Client
                     case System.Net.HttpStatusCode.OK:
                         return (ProductionUnitDetail)response.Body;
 
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
-
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
             }
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
