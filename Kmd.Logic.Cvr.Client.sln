@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fake", "fake", "{E4CC60C1-C
 	ProjectSection(SolutionItems) = preProject
 		fake\allowed_cvr.json = fake\allowed_cvr.json
 		fake\cvr_35533729.json = fake\cvr_35533729.json
+		fake\cvr_punitdetail_1089377672.json = fake\cvr_punitdetail_1089377672.json
+		fake\cvr_punits_35533729.json = fake\cvr_punits_35533729.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client", "src\Kmd.Logic.Cvr.Client\Kmd.Logic.Cvr.Client.csproj", "{63DDA49B-BF5B-4C7B-B850-42016761AA53}"

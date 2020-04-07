@@ -19,7 +19,6 @@ namespace Kmd.Logic.Cvr.Client.Models
             CustomInit();
         }
 
-
         /// <summary>
         /// Initializes a new instance of the Company class.
         /// </summary>

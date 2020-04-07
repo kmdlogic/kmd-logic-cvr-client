@@ -8,5 +8,15 @@
       "Cvr": "29189757",
       "RandomData": true
     }
+  ],
+  "WellKnownPNumber": [
+    {
+      "PNumber": "1089377672",
+      "RandomData": false
+    },
+    {
+      "PNumber": "1022367521",
+      "RandomData": true
+    }
   ]
 }

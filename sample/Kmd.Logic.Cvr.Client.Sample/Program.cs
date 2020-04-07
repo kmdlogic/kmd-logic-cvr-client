@@ -64,7 +64,7 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 var configs = await cvrClient.GetAllCvrConfigurationsAsync().ConfigureAwait(false);
                 if (configs == null || configs.Count == 0)
                 {
-                    Log.Error("There are no CVR configurations defined for this subscription");
+                    Log.Information("There are no CVR configurations defined for this subscription");
                     return;
                 }
 
@@ -96,6 +96,24 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 var company = await cvrClient.GetCompanyByCvrAsync(configuration.CvrNumber).ConfigureAwait(false);
 
                 Log.Information("Company data: {@Company}", company);
+
+                Log.Information("Fetching Production Units for CVR number {Cvr}", configuration.CvrNumber);
+
+                var productionUnits = await cvrClient.GetProductionUnitsAsync(configuration.CvrNumber).ConfigureAwait(false);
+
+                if (productionUnits == null || productionUnits.Count == 0)
+                {
+                    Log.Information("There is no Production Unit defined for this company");
+                    return;
+                }
+
+                Log.Information("Production Units data for Company {@CompanyName}: {@ProductionUnits}", company.CompanyName, productionUnits);
+
+                Log.Information("Fetching Production Unit Detail for production unit number {PNumber}", productionUnits[0].PNumber);
+
+                var productionUnitDetail = await cvrClient.GetProductionUnitDetailAsync(productionUnits[0].PNumber).ConfigureAwait(false);
+
+                Log.Information("Production Unit Detail data: {@ProductionUnitDetail}", productionUnitDetail);
             }
         }
     }
