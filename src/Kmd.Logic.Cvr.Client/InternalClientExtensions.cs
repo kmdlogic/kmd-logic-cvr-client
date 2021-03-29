@@ -14,9 +14,9 @@ namespace Kmd.Logic.Cvr.Client
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for KMDLogicCVRServiceServiceAPI.
+    /// Extension methods for InternalClient.
     /// </summary>
-    public static partial class KMDLogicCVRServiceAPIExtensions
+    internal static partial class InternalClientExtensions
     {
             /// <summary>
             /// Gets Production unit detail by production unit number
@@ -34,7 +34,7 @@ namespace Kmd.Logic.Cvr.Client
             /// Identifier that represents CVR environment and associated configuration
             /// which this request will be sent with.
             /// </param>
-            public static object GetProductionUnitDetailByPNumber(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string pNumber, System.Guid? configurationId = default(System.Guid?))
+            public static object GetProductionUnitDetailByPNumber(this IInternalClient operations, System.Guid subscriptionId, string pNumber, System.Guid? configurationId = default(System.Guid?))
             {
                 return operations.GetProductionUnitDetailByPNumberAsync(subscriptionId, pNumber, configurationId).GetAwaiter().GetResult();
             }
@@ -58,7 +58,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetProductionUnitDetailByPNumberAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string pNumber, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetProductionUnitDetailByPNumberAsync(this IInternalClient operations, System.Guid subscriptionId, string pNumber, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetProductionUnitDetailByPNumberWithHttpMessagesAsync(subscriptionId, pNumber, configurationId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -82,7 +82,7 @@ namespace Kmd.Logic.Cvr.Client
             /// Identifier that represents CVR environment and associated configuration
             /// which this request will be sent with.
             /// </param>
-            public static object GetByCvr(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?))
+            public static object GetByCvr(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?))
             {
                 return operations.GetByCvrAsync(subscriptionId, cvr, configurationId).GetAwaiter().GetResult();
             }
@@ -106,7 +106,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetByCvrAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetByCvrAsync(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetByCvrWithHttpMessagesAsync(subscriptionId, cvr, configurationId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -130,7 +130,7 @@ namespace Kmd.Logic.Cvr.Client
             /// Identifier that represents CVR environment and associated configuration
             /// which this request will be sent with.
             /// </param>
-            public static object GetProductionUnitByCvr(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?))
+            public static object GetProductionUnitByCvr(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?))
             {
                 return operations.GetProductionUnitByCvrAsync(subscriptionId, cvr, configurationId).GetAwaiter().GetResult();
             }
@@ -154,9 +154,141 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetProductionUnitByCvrAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetProductionUnitByCvrAsync(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetProductionUnitByCvrWithHttpMessagesAsync(subscriptionId, cvr, configurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets Company events for the nominated period
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='dateFrom'>
+            /// Query events from this date and time
+            /// </param>
+            /// <param name='dateTo'>
+            /// Query events to this date and time
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            /// <param name='pageNo'>
+            /// The page number to query
+            /// </param>
+            /// <param name='pageSize'>
+            /// The maximum number of results to return
+            /// </param>
+            public static object GetEvents(this IInternalClient operations, System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?))
+            {
+                return operations.GetEventsAsync(subscriptionId, dateFrom, dateTo, configurationId, pageNo, pageSize).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets Company events for the nominated period
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='dateFrom'>
+            /// Query events from this date and time
+            /// </param>
+            /// <param name='dateTo'>
+            /// Query events to this date and time
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            /// <param name='pageNo'>
+            /// The page number to query
+            /// </param>
+            /// <param name='pageSize'>
+            /// The maximum number of results to return
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetEventsAsync(this IInternalClient operations, System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetEventsWithHttpMessagesAsync(subscriptionId, dateFrom, dateTo, configurationId, pageNo, pageSize, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets the subscribed company events for the nominated period
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='dateFrom'>
+            /// Query events from this date and time
+            /// </param>
+            /// <param name='dateTo'>
+            /// Query events to this date and time
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            /// <param name='pageNo'>
+            /// The page number to query
+            /// </param>
+            /// <param name='pageSize'>
+            /// The maximum number of results to return
+            /// </param>
+            public static object GetSubscribedEvents(this IInternalClient operations, System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?))
+            {
+                return operations.GetSubscribedEventsAsync(subscriptionId, dateFrom, dateTo, configurationId, pageNo, pageSize).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets the subscribed company events for the nominated period
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='dateFrom'>
+            /// Query events from this date and time
+            /// </param>
+            /// <param name='dateTo'>
+            /// Query events to this date and time
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            /// <param name='pageNo'>
+            /// The page number to query
+            /// </param>
+            /// <param name='pageSize'>
+            /// The maximum number of results to return
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetSubscribedEventsAsync(this IInternalClient operations, System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSubscribedEventsWithHttpMessagesAsync(subscriptionId, dateFrom, dateTo, configurationId, pageNo, pageSize, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -172,7 +304,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='configurationId'>
             /// </param>
-            public static CvrProviderConfigurationModel GetCvrConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId)
+            public static CvrProviderConfigurationModel GetCvrConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId)
             {
                 return operations.GetCvrConfigurationAsync(subscriptionId, configurationId).GetAwaiter().GetResult();
             }
@@ -190,7 +322,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrProviderConfigurationModel> GetCvrConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CvrProviderConfigurationModel> GetCvrConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetCvrConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -206,7 +338,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='subscriptionId'>
             /// </param>
-            public static IList<CvrProviderConfigurationModel> GetAllCvrConfigurations(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId)
+            public static IList<CvrProviderConfigurationModel> GetAllCvrConfigurations(this IInternalClient operations, System.Guid subscriptionId)
             {
                 return operations.GetAllCvrConfigurationsAsync(subscriptionId).GetAwaiter().GetResult();
             }
@@ -222,9 +354,101 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<CvrProviderConfigurationModel>> GetAllCvrConfigurationsAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<CvrProviderConfigurationModel>> GetAllCvrConfigurationsAsync(this IInternalClient operations, System.Guid subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetAllCvrConfigurationsWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Subscribe to Cvr events by Object Id
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='objectId'>
+            /// Object Id
+            /// </param>
+            /// <param name='request'>
+            /// CVR Subscription Request
+            /// </param>
+            public static object SubscribeByObjectId(this IInternalClient operations, System.Guid subscriptionId, string objectId, CvrSubscriptionRequest request = default(CvrSubscriptionRequest))
+            {
+                return operations.SubscribeByObjectIdAsync(subscriptionId, objectId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Subscribe to Cvr events by Object Id
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='objectId'>
+            /// Object Id
+            /// </param>
+            /// <param name='request'>
+            /// CVR Subscription Request
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> SubscribeByObjectIdAsync(this IInternalClient operations, System.Guid subscriptionId, string objectId, CvrSubscriptionRequest request = default(CvrSubscriptionRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SubscribeByObjectIdWithHttpMessagesAsync(subscriptionId, objectId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Unsubscribe from Cvr events by object id
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='objectId'>
+            /// Object Id
+            /// </param>
+            /// <param name='configurationId'>
+            /// CVR Configuration ID
+            /// </param>
+            public static IDictionary<string, string> UnsubscribeByObjectId(this IInternalClient operations, System.Guid subscriptionId, string objectId, System.Guid? configurationId = default(System.Guid?))
+            {
+                return operations.UnsubscribeByObjectIdAsync(subscriptionId, objectId, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Unsubscribe from Cvr events by object id
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// LoGIC subscription ID
+            /// </param>
+            /// <param name='objectId'>
+            /// Object Id
+            /// </param>
+            /// <param name='configurationId'>
+            /// CVR Configuration ID
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IDictionary<string, string>> UnsubscribeByObjectIdAsync(this IInternalClient operations, System.Guid subscriptionId, string objectId, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UnsubscribeByObjectIdWithHttpMessagesAsync(subscriptionId, objectId, configurationId, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -248,7 +472,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='certificatePassword'>
             /// </param>
-            public static CvrProviderConfiguration CreateDataDistributorCvrConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string))
+            public static CvrProviderConfiguration CreateDataDistributorCvrConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string))
             {
                 return operations.CreateDataDistributorCvrConfigurationAsync(subscriptionId, name, environment, certificate, certificatePassword).GetAwaiter().GetResult();
             }
@@ -274,7 +498,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrProviderConfiguration> CreateDataDistributorCvrConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CvrProviderConfiguration> CreateDataDistributorCvrConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateDataDistributorCvrConfigurationWithHttpMessagesAsync(subscriptionId, name, environment, certificate, certificatePassword, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -302,7 +526,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='certificatePassword'>
             /// </param>
-            public static CvrProviderConfiguration UpdateDataDistributorCvrConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string))
+            public static CvrProviderConfiguration UpdateDataDistributorCvrConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string))
             {
                 return operations.UpdateDataDistributorCvrConfigurationAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword).GetAwaiter().GetResult();
             }
@@ -330,7 +554,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrProviderConfiguration> UpdateDataDistributorCvrConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CvrProviderConfiguration> UpdateDataDistributorCvrConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateDataDistributorCvrConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -345,7 +569,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static CvrFakeProviderConfiguration CreateFakeProviderConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string name)
+            public static CvrFakeProviderConfiguration CreateFakeProviderConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name)
             {
                 return operations.CreateFakeProviderConfigurationAsync(subscriptionId, name).GetAwaiter().GetResult();
             }
@@ -360,7 +584,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrFakeProviderConfiguration> CreateFakeProviderConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CvrFakeProviderConfiguration> CreateFakeProviderConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateFakeProviderConfigurationWithHttpMessagesAsync(subscriptionId, name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -377,7 +601,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static CvrFakeProviderConfiguration UpdateFakeProviderConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, string name)
+            public static CvrFakeProviderConfiguration UpdateFakeProviderConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name)
             {
                 return operations.UpdateFakeProviderConfigurationAsync(subscriptionId, configurationId, name).GetAwaiter().GetResult();
             }
@@ -394,7 +618,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrFakeProviderConfiguration> UpdateFakeProviderConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CvrFakeProviderConfiguration> UpdateFakeProviderConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateFakeProviderConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -418,7 +642,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='municipalityCvr'>
             /// </param>
-            public static ServicePlatformCvrProviderConfiguration CreateServicePlatformConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string))
+            public static ServicePlatformCvrProviderConfiguration CreateServicePlatformConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string))
             {
                 return operations.CreateServicePlatformConfigurationAsync(subscriptionId, name, environment, certificate, certificatePassword, municipalityCvr).GetAwaiter().GetResult();
             }
@@ -442,7 +666,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ServicePlatformCvrProviderConfiguration> CreateServicePlatformConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ServicePlatformCvrProviderConfiguration> CreateServicePlatformConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateServicePlatformConfigurationWithHttpMessagesAsync(subscriptionId, name, environment, certificate, certificatePassword, municipalityCvr, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -468,7 +692,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='municipalityCvr'>
             /// </param>
-            public static ServicePlatformCvrProviderConfiguration UpdateServicePlatformConfiguration(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string))
+            public static ServicePlatformCvrProviderConfiguration UpdateServicePlatformConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string))
             {
                 return operations.UpdateServicePlatformConfigurationAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, municipalityCvr).GetAwaiter().GetResult();
             }
@@ -494,7 +718,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ServicePlatformCvrProviderConfiguration> UpdateServicePlatformConfigurationAsync(this IKMDLogicCVRServiceAPI operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ServicePlatformCvrProviderConfiguration> UpdateServicePlatformConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateServicePlatformConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, municipalityCvr, null, cancellationToken).ConfigureAwait(false))
                 {

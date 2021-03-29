@@ -21,22 +21,19 @@ namespace Kmd.Logic.Cvr.Client.Models
         }
 
         /// <summary>
+        /// Initializes a new instance of the
         /// ServicePlatformCvrProviderConfiguration class.
         /// </summary>
-        /// <param name="municipalityCvr"></param>
-        /// <param name="id"></param>
-        /// <param name="subscriptionId"></param>
-        /// <param name="name"></param>
-        /// <param name="certificateFileName"></param>
-        /// <param name="environment">Possible values include: 'Production', 'Test'</param>
-        public ServicePlatformCvrProviderConfiguration(string municipalityCvr = default(string), System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string))
+        /// <param name="environment">Possible values include: 'Production',
+        /// 'Test'</param>
+        public ServicePlatformCvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string), string municipalityCvr = default(string))
         {
-            MunicipalityCvr = municipalityCvr;
             Id = id;
             SubscriptionId = subscriptionId;
             Name = name;
             CertificateFileName = certificateFileName;
             Environment = environment;
+            MunicipalityCvr = municipalityCvr;
             CustomInit();
         }
 
@@ -44,11 +41,6 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "municipalityCvr")]
-        public string MunicipalityCvr { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -75,6 +67,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "environment")]
         public string Environment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "municipalityCvr")]
+        public string MunicipalityCvr { get; set; }
 
     }
 }
