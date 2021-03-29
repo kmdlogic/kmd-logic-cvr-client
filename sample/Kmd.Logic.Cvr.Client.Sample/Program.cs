@@ -117,8 +117,18 @@ namespace Kmd.Logic.Cvr.Client.Sample
 
                 Log.Information("Fetching company events using configuration {Name}", cvrProvider.Name);
                 var events = await cvrClient.GetAllCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, 1, 100).ConfigureAwait(false);
-
                 Log.Information("Fetched {Amount} company events", events.Count);
+
+                if (events.Count > 0)
+                {
+                    var companyToSubscribe = events.First().Id;
+                    Log.Information("Subscribing for events of company with object id {ObjectId}", companyToSubscribe);
+                    await cvrClient.SubscribeByIdAsync(companyToSubscribe).ConfigureAwait(false);
+
+                    Log.Information("Fetching events for subscribed companies using configuration {Name}", cvrProvider.Name);
+                    var subscribedEvents = await cvrClient.GetSubscribedCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, 1, 100).ConfigureAwait(false);
+                    Log.Information("Fetched {Amount} company subscribed events", subscribedEvents.Events.Count);
+                }
             }
         }
     }
