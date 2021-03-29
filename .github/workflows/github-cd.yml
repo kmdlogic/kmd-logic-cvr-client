@@ -1,0 +1,45 @@
+name: CVR Client NuGet CI
+
+env:
+  PROJPATH: './src/Kmd.Logic.Cvr.Client'
+  DOTNET_VERSION: '3.1.301'
+
+on:
+  push:
+    branches: [ master ]
+    paths: 
+    - 'src/**'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get current time
+      uses: 1466587594/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYYMMDD-HHmm
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: Install dependencies
+      run: dotnet restore '${{ env.PROJPATH }}/Kmd.Logic.Cvr.Client.csproj'
+
+    - name: Build
+      run: dotnet build '${{ env.PROJPATH }}/Kmd.Logic.Cvr.Client.csproj' --configuration Release --no-restore
+
+    - name: Pack
+      run: dotnet pack '${{ env.PROJPATH }}/Kmd.Logic.Cvr.Client.csproj' --output ${{ env.PROJPATH }}/nupkgs --no-restore
+      if: GITHUB.REF == 'refs/heads/master'
+
+    - name: Publish NuGet
+      run: dotnet nuget push ${{ env.PROJPATH }}/nupkgs/Kmd.Logic.Cvr.Client*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      if: GITHUB.REF == 'refs/heads/master'
