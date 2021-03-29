@@ -24,7 +24,7 @@ namespace Kmd.Logic.Cvr.Client
         private readonly HttpClient httpClient;
         private readonly CvrOptions options;
         private readonly LogicTokenProviderFactory tokenProviderFactory;
-        private KMDLogicCVRServiceAPI internalClient;
+        private InternalClient internalClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CvrClient"/> class.
@@ -147,10 +147,117 @@ namespace Kmd.Logic.Cvr.Client
         }
 
         /// <summary>
-        /// Gets or Intialize the instance of the <see cref="KMDLogicCVRServiceAPI"/> class.
+        /// Subscribes for CVR events by Object ID.
+        /// </summary>
+        /// <param name="objectId">The CVR Object ID.</param>
+        /// <returns>The Saved Cvr Object ID.</returns>
+        /// <exception cref="ValidationException"> When subscriptionId or The CVR Object ID is null.</exception>
+        /// <exception cref="SerializationException">Unable process the service response.</exception>
+        public async Task<bool> SubscribeByIdAsync(string objectId)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.SubscribeByObjectIdWithHttpMessagesAsync(
+                 subscriptionId: this.options.SubscriptionId,
+                 objectId: objectId,
+                 request: new CvrSubscriptionRequest(this.options.CvrConfigurationId)).ConfigureAwait(false))
+            {
+                return response.Response.IsSuccessStatusCode;
+            }
+        }
+
+        /// <summary>
+        /// Unsubscribes for CVR events by Object ID.
+        /// </summary>
+        /// <param name="objectId">The CVR Object ID.</param>
+        /// <returns>True in case of unsubscribe.</returns>
+        /// <exception cref="ValidationException"> When subscriptionId or CVR number is null.</exception>
+        public async Task<bool> UnsubscribeByIdAsync(string objectId)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.UnsubscribeByObjectIdWithHttpMessagesAsync(
+                   subscriptionId: this.options.SubscriptionId,
+                   objectId: objectId,
+                   configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+            {
+                return response.Response.IsSuccessStatusCode;
+            }
+        }
+
+        /// <summary>
+        /// Gets company events for the nominated period.
+        /// </summary>
+        /// <param name="dateFom">Query events from this date and time.</param>
+        /// <param name="dateTo">Query events to this date and time.</param>
+        /// <param name="pageNo">The page number to query, starting at 1.</param>
+        /// <param name="pageSize">The maximum number of results to return.</param>
+        /// <returns>List of citizen records.</returns>
+        public async Task<IList<CompanyEvent>> GetAllCompanyEventsAsync(DateTime dateFom, DateTime dateTo, int pageNo, int pageSize)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.GetEventsWithHttpMessagesAsync(
+                subscriptionId: this.options.SubscriptionId,
+                dateFrom: dateFom,
+                dateTo: dateTo,
+                configurationId: this.options.CvrConfigurationId,
+                pageNo: pageNo,
+                pageSize: pageSize).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return response.Body as IList<CompanyEvent>;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+
+                    default:
+                        throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets Subscribed company events for the nominated period.
+        /// </summary>
+        /// <param name="dateFom">Query events from this date and time.</param>
+        /// <param name="dateTo">Query events to this date and time.</param>
+        /// <param name="pageNo">The page number to query, starting at 1.</param>
+        /// <param name="pageSize">The maximum number of results to return.</param>
+        /// <returns>Subscribed citizen records.</returns>
+        public async Task<SubscribedCompanyEvents> GetSubscribedCompanyEventsAsync(DateTime dateFom, DateTime dateTo, int pageNo, int pageSize)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.GetSubscribedEventsWithHttpMessagesAsync(
+                subscriptionId: this.options.SubscriptionId,
+                dateFrom: dateFom,
+                dateTo: dateTo,
+                configurationId: this.options.CvrConfigurationId,
+                pageNo: pageNo,
+                pageSize: pageSize).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return response.Body as SubscribedCompanyEvents;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+
+                    default:
+                        throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or Intialize the instance of the <see cref="InternalClient"/> class.
         /// </summary>
         /// <returns>The instance of KMDLogicCVRServiceServiceAPI.</returns>
-        private KMDLogicCVRServiceAPI CreateClient()
+        private InternalClient CreateClient()
         {
             if (this.internalClient != null)
             {
@@ -159,7 +266,7 @@ namespace Kmd.Logic.Cvr.Client
 
             var tokenProvider = this.tokenProviderFactory.GetProvider(this.httpClient);
 
-            this.internalClient = new KMDLogicCVRServiceAPI(new TokenCredentials(tokenProvider))
+            this.internalClient = new InternalClient(new TokenCredentials(tokenProvider))
             {
                 BaseUri = this.options.CvrServiceUri,
             };

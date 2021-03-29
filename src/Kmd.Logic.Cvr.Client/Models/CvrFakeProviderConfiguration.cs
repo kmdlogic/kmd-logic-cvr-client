@@ -21,7 +21,8 @@ namespace Kmd.Logic.Cvr.Client.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the CvrFakeProviderConfiguration class.
+        /// Initializes a new instance of the CvrFakeProviderConfiguration
+        /// class.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="subscriptionId"></param>

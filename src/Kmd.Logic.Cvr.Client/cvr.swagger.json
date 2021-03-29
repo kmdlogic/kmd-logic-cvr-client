@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "KMD Logic CVR Service Service API"
+    "title": "KMD Logic CVR Service API"
   },
   "paths": {
     "/subscriptions/{subscriptionId}/cvr/production-unit-detail/{pNumber}": {
@@ -194,6 +194,175 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/cvr/events": {
+      "get": {
+        "tags": [
+          "Cvr"
+        ],
+        "summary": "Gets Company events for the nominated period",
+        "operationId": "GetEvents",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "LoGIC subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Query events from this date and time",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Query events to this date and time",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "configurationId",
+            "in": "query",
+            "description": "Identifier that represents CVR environment and associated configuration which this request will be sent with.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "The page number to query",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of results to return",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 100000,
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CompanyEvent"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/subscribed-events": {
+      "get": {
+        "tags": [
+          "Cvr"
+        ],
+        "summary": "Gets the subscribed company events for the nominated period",
+        "operationId": "GetSubscribedEvents",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "LoGIC subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Query events from this date and time",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Query events to this date and time",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "configurationId",
+            "in": "query",
+            "description": "Identifier that represents CVR environment and associated configuration which this request will be sent with.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "The page number to query",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of results to return",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 100000,
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SubscribedCompanyEvents"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/cvr/configurations/{configurationId}": {
       "get": {
         "tags": [
@@ -277,6 +446,126 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/subscribe/{objectId}": {
+      "post": {
+        "tags": [
+          "CvrSubscription"
+        ],
+        "summary": "Subscribe to Cvr events by Object Id",
+        "operationId": "SubscribeByObjectId",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "LoGIC subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Object Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "CVR Subscription Request",
+            "schema": {
+              "$ref": "#/definitions/CvrSubscriptionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/unsubscribe/{objectId}": {
+      "delete": {
+        "tags": [
+          "CvrSubscription"
+        ],
+        "summary": "Unsubscribe from Cvr events by object id",
+        "operationId": "UnsubscribeByObjectId",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "LoGIC subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Object Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationId",
+            "in": "query",
+            "description": "CVR Configuration ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
           }
         },
         "security": [
@@ -821,6 +1110,46 @@
         }
       }
     },
+    "CompanyEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The CVR identifier",
+          "type": "string"
+        },
+        "action": {
+          "description": "A description of the action that occurred. This may differ between providers.",
+          "type": "string"
+        },
+        "actionDateTime": {
+          "format": "date-time",
+          "description": "The date and time the action occurred",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscribedCompanyEvents": {
+      "description": "Company Event the user has subscribed to",
+      "required": [
+        "actualCount"
+      ],
+      "type": "object",
+      "properties": {
+        "events": {
+          "description": "The events filtered by subscription",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompanyEvent"
+          }
+        },
+        "actualCount": {
+          "format": "int32",
+          "description": "Number of CVR events fetched prior to filtering to just the subscribed companies",
+          "type": "integer"
+        }
+      }
+    },
     "CvrProviderConfigurationModel": {
       "type": "object",
       "properties": {
@@ -842,6 +1171,15 @@
           "type": "string"
         },
         "provider": {
+          "type": "string"
+        }
+      }
+    },
+    "CvrSubscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "configurationId": {
+          "format": "uuid",
           "type": "string"
         }
       }
@@ -901,10 +1239,6 @@
     "ServicePlatformCvrProviderConfiguration": {
       "type": "object",
       "properties": {
-        "municipalityCvr": {
-          "type": "string",
-          "readOnly": true
-        },
         "id": {
           "format": "uuid",
           "type": "string"
@@ -925,6 +1259,9 @@
             "Production",
             "Test"
           ]
+        },
+        "municipalityCvr": {
+          "type": "string"
         }
       }
     }

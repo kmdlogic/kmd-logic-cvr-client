@@ -17,7 +17,7 @@ namespace Kmd.Logic.Cvr.Client
 
     /// <summary>
     /// </summary>
-    public partial interface IKMDLogicCVRServiceAPI : System.IDisposable
+    internal partial interface IInternalClient : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
@@ -105,6 +105,66 @@ namespace Kmd.Logic.Cvr.Client
         Task<HttpOperationResponse<object>> GetProductionUnitByCvrWithHttpMessagesAsync(System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Gets Company events for the nominated period
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// LoGIC subscription ID
+        /// </param>
+        /// <param name='dateFrom'>
+        /// Query events from this date and time
+        /// </param>
+        /// <param name='dateTo'>
+        /// Query events to this date and time
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier that represents CVR environment and associated
+        /// configuration which this request will be sent with.
+        /// </param>
+        /// <param name='pageNo'>
+        /// The page number to query
+        /// </param>
+        /// <param name='pageSize'>
+        /// The maximum number of results to return
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetEventsWithHttpMessagesAsync(System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets the subscribed company events for the nominated period
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// LoGIC subscription ID
+        /// </param>
+        /// <param name='dateFrom'>
+        /// Query events from this date and time
+        /// </param>
+        /// <param name='dateTo'>
+        /// Query events to this date and time
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier that represents CVR environment and associated
+        /// configuration which this request will be sent with.
+        /// </param>
+        /// <param name='pageNo'>
+        /// The page number to query
+        /// </param>
+        /// <param name='pageSize'>
+        /// The maximum number of results to return
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetSubscribedEventsWithHttpMessagesAsync(System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Retrieves CVR configuration assigned to the logic subscription
         /// </summary>
         /// <param name='subscriptionId'>
@@ -131,6 +191,46 @@ namespace Kmd.Logic.Cvr.Client
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<IList<CvrProviderConfigurationModel>>> GetAllCvrConfigurationsWithHttpMessagesAsync(System.Guid subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Subscribe to Cvr events by Object Id
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// LoGIC subscription ID
+        /// </param>
+        /// <param name='objectId'>
+        /// Object Id
+        /// </param>
+        /// <param name='request'>
+        /// CVR Subscription Request
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> SubscribeByObjectIdWithHttpMessagesAsync(System.Guid subscriptionId, string objectId, CvrSubscriptionRequest request = default(CvrSubscriptionRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Unsubscribe from Cvr events by object id
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// LoGIC subscription ID
+        /// </param>
+        /// <param name='objectId'>
+        /// Object Id
+        /// </param>
+        /// <param name='configurationId'>
+        /// CVR Configuration ID
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IDictionary<string, string>>> UnsubscribeByObjectIdWithHttpMessagesAsync(System.Guid subscriptionId, string objectId, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Adds new CVR configuration and uploads certificate file to the
