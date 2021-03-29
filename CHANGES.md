@@ -1,3 +1,6 @@
+1.4.0
+* Updated CVR client for new endpoints added to get company events.
+
 1.3.0
 * Updated CVR client for new endpoints added to get Production Units and Production Unit detail.
 
