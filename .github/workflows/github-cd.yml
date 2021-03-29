@@ -38,7 +38,6 @@ jobs:
 
     - name: Pack
       run: dotnet pack '${{ env.PROJPATH }}/Kmd.Logic.Cvr.Client.csproj' --output ${{ env.PROJPATH }}/nupkgs --no-restore
-      if: GITHUB.REF == 'refs/heads/master'
 
     - name: Publish NuGet
       run: dotnet nuget push ${{ env.PROJPATH }}/nupkgs/Kmd.Logic.Cvr.Client*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
