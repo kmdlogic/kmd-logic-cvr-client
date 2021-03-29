@@ -115,7 +115,7 @@ namespace Kmd.Logic.Cvr.Client.Sample
 
                 Log.Information("Production Unit Detail data: {@ProductionUnitDetail}", productionUnitDetail);
 
-                Log.Information("Fetching company events using configuration {Name}", configuration.CvrNumber, cvrProvider.Name);
+                Log.Information("Fetching company events using configuration {Name}", cvrProvider.Name);
 
                 var events = await cvrClient.GetAllCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, 1, 100).ConfigureAwait(false);
 
