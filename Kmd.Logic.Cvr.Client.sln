@@ -21,16 +21,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{CF
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		appveyor.yml = appveyor.yml
-		build.ps1 = build.ps1
-		build.sh = build.sh
 		CHANGES.md = CHANGES.md
 		Directory.Build.props = Directory.Build.props
+		.github\workflows\github-cd.yml = .github\workflows\github-cd.yml
 		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
-		setup.ps1 = setup.ps1
-		setup.sh = setup.sh
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client.Sample", "sample\Kmd.Logic.Cvr.Client.Sample\Kmd.Logic.Cvr.Client.Sample.csproj", "{DCF57759-D612-48F9-A128-5F535FEAACC6}"
