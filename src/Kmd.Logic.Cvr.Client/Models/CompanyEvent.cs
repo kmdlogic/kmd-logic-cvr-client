@@ -22,14 +22,18 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// <summary>
         /// Initializes a new instance of the CompanyEvent class.
         /// </summary>
-        /// <param name="id">The CVR identifier</param>
+        /// <param name="id">The event's object Id. This may differ between
+        /// providers.</param>
+        /// <param name="objectType">The event's object type. This may
+        /// differ between providers.</param>
         /// <param name="action">A description of the action that occurred.
         /// This may differ between providers.</param>
         /// <param name="actionDateTime">The date and time the action
         /// occurred</param>
-        public CompanyEvent(string id = default(string), string action = default(string), System.DateTime? actionDateTime = default(System.DateTime?))
+        public CompanyEvent(string id = default(string), string objectType = default(string), string action = default(string), System.DateTime? actionDateTime = default(System.DateTime?))
         {
             Id = id;
+            ObjectType = objectType;
             Action = action;
             ActionDateTime = actionDateTime;
             CustomInit();
@@ -41,10 +45,18 @@ namespace Kmd.Logic.Cvr.Client.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the CVR identifier
+        /// Gets or sets the event's object Id. This may differ between
+        /// providers.
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the event's object type. This may differ between
+        /// providers.
+        /// </summary>
+        [JsonProperty(PropertyName = "objectType")]
+        public string ObjectType { get; set; }
 
         /// <summary>
         /// Gets or sets a description of the action that occurred. This may
@@ -54,10 +66,10 @@ namespace Kmd.Logic.Cvr.Client.Models
         public string Action { get; set; }
 
         /// <summary>
-        /// Gets the date and time the action occurred
+        /// Gets or sets the date and time the action occurred
         /// </summary>
         [JsonProperty(PropertyName = "actionDateTime")]
-        public System.DateTime? ActionDateTime { get; private set; }
+        public System.DateTime? ActionDateTime { get; set; }
 
     }
 }

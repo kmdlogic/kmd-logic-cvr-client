@@ -22,8 +22,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// <summary>
         /// Initializes a new instance of the Company class.
         /// </summary>
-        public Company(string cvrNumber = default(string), string companyName = default(string), string phoneNumber = default(string), string eMailAddress = default(string), string mainBusinessCode = default(string), string mainBusinessDescription = default(string), string businessTypeCode = default(string), string dataProvider = default(string), CvrAddress cvrAddress = default(CvrAddress))
+        /// <param name="id">The company object Id. This may differ between
+        /// providers.</param>
+        public Company(string id = default(string), string cvrNumber = default(string), string companyName = default(string), string phoneNumber = default(string), string eMailAddress = default(string), string mainBusinessCode = default(string), string mainBusinessDescription = default(string), string businessTypeCode = default(string), string dataProvider = default(string), CvrAddress cvrAddress = default(CvrAddress))
         {
+            Id = id;
             CvrNumber = cvrNumber;
             CompanyName = companyName;
             PhoneNumber = phoneNumber;
@@ -40,6 +43,13 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets the company object Id. This may differ between
+        /// providers.
+        /// </summary>
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// </summary>

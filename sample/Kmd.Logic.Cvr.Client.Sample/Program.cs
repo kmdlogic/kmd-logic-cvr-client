@@ -119,15 +119,27 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 var events = await cvrClient.GetAllCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, 1, 100).ConfigureAwait(false);
                 Log.Information("Fetched {Amount} company events", events.Count);
 
-                if (events.Count > 0)
+                var eventsCount = events.Count;
+                if (eventsCount > 0)
                 {
-                    var companyToSubscribe = events.First().Id;
+                    var companyToSubscribe = company.Id;
                     Log.Information("Subscribing for events of company with object id {ObjectId}", companyToSubscribe);
                     await cvrClient.SubscribeByIdAsync(companyToSubscribe).ConfigureAwait(false);
 
+                    var productionUnitToSubscribe = productionUnitDetail.Id;
+                    Log.Information("Subscribing for events of company's production unit with object id {ObjectId}", productionUnitToSubscribe);
+                    await cvrClient.SubscribeByIdAsync(productionUnitToSubscribe).ConfigureAwait(false);
+
                     Log.Information("Fetching events for subscribed companies using configuration {Name}", cvrProvider.Name);
-                    var subscribedEvents = await cvrClient.GetSubscribedCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, 1, 100).ConfigureAwait(false);
-                    Log.Information("Fetched {Amount} company subscribed events", subscribedEvents.Events.Count);
+                    var page = 1;
+                    var fetchedEventsCount = 0;
+                    while (fetchedEventsCount == 0)
+                    {
+                        var subscribedEvents = await cvrClient.GetSubscribedCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, page, 100).ConfigureAwait(false);
+                        fetchedEventsCount = subscribedEvents.Events.Count;
+                        Log.Information("Fetched {Amount} company subscribed events", subscribedEvents.Events.Count);
+                        page++;
+                    }
                 }
             }
         }
