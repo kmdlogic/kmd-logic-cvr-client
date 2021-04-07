@@ -24,7 +24,9 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         /// <param name="id">The company's production unit object Id. This may
         /// differ between providers.</param>
+#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
         public ProductionUnitDetail(string id = default(string), string pNumber = default(string), string cvrNumber = default(string), string productionUnitName = default(string), string phoneNumber = default(string), string emailAddress = default(string), LocationAddress locationAddress = default(LocationAddress), LineOfIndustries lineOfIndustries = default(LineOfIndustries))
+#pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
         {
             Id = id;
             PNumber = pNumber;
