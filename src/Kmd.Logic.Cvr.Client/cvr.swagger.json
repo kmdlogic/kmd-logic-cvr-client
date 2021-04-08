@@ -1018,6 +1018,10 @@
     "ProductionUnitDetail": {
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The company's production unit object Id. This may differ between providers.",
+          "type": "string"
+        },
         "pNumber": {
           "type": "string"
         },
@@ -1070,6 +1074,10 @@
     "Company": {
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The company object Id. This may differ between providers.",
+          "type": "string"
+        },
         "cvrNumber": {
           "type": "string"
         },
@@ -1114,7 +1122,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The CVR identifier",
+          "description": "The event's object Id. This may differ between providers.",
+          "type": "string"
+        },
+        "objectType": {
+          "description": "The event's object type. This may differ between providers.",
           "type": "string"
         },
         "action": {
@@ -1124,8 +1136,7 @@
         "actionDateTime": {
           "format": "date-time",
           "description": "The date and time the action occurred",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
