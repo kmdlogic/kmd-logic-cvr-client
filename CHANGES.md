@@ -1,3 +1,6 @@
+1.5.0
+* Updated CVR client with adding ObjectID to the GET responses.
+
 1.4.0
 * Updated CVR client for new endpoints added to get company events.
 
