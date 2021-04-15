@@ -67,10 +67,37 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return (Company)response.Body;
-
                     case System.Net.HttpStatusCode.NotFound:
                         return null;
+                    default:
+                        throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
+                }
+            }
+        }
 
+        /// <summary>
+        /// Get the details of a company from the CVR register.
+        /// </summary>
+        /// <param name="objectId">The Company's Object ID.</param>
+        /// <returns>The company details or null if the object id isn't valid.</returns>
+        /// <exception cref="ValidationException">Missing object id.</exception>
+        /// <exception cref="SerializationException">Unable process the service response.</exception>
+        /// <exception cref="LogicTokenProviderException">Unable to issue an authorization token.</exception>
+        /// <exception cref="CvrConfigurationException">Invalid CVR configuration details.</exception>
+        public async Task<Company> GetCompanyByIdAsync(string objectId)
+        {
+            var client = this.CreateClient();
+            using (var response = await client.GetByIdWithHttpMessagesAsync(
+                                subscriptionId: this.options.SubscriptionId,
+                                id: objectId,
+                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return (Company)response.Body;
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
@@ -102,7 +129,7 @@ namespace Kmd.Logic.Cvr.Client
         public async Task<IList<ProductionUnit>> GetProductionUnitsAsync(string cvr)
         {
             var client = this.CreateClient();
-            using (var response = await client.GetProductionUnitByCvrWithHttpMessagesAsync(
+            using (var response = await client.GetProductionUnitsByCvrWithHttpMessagesAsync(
                                 subscriptionId: this.options.SubscriptionId,
                                 cvr: cvr,
                                 configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
@@ -111,7 +138,6 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return (IList<ProductionUnit>)response.Body;
-
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
@@ -123,7 +149,7 @@ namespace Kmd.Logic.Cvr.Client
         /// </summary>
         /// <param name="pNumber">The Production unit number.</param>
         /// <returns>The production unit detail.</returns>
-        /// <exception cref="ValidationException">Missing cvr number.</exception>
+        /// <exception cref="ValidationException">Missing pNumber.</exception>
         /// <exception cref="SerializationException">Unable process the service response.</exception>
         /// <exception cref="LogicTokenProviderException">Unable to issue an authorization token.</exception>
         /// <exception cref="CvrConfigurationException">Invalid CVR configuration details.</exception>
@@ -139,7 +165,33 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return (ProductionUnitDetail)response.Body;
+                    default:
+                        throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
+                }
+            }
+        }
 
+        /// <summary>
+        /// Get the production unit detail from the CVR register.
+        /// </summary>
+        /// <param name="objectId">The Production unit's Object ID.</param>
+        /// <returns>The production unit detail.</returns>
+        /// <exception cref="ValidationException">Missing object id.</exception>
+        /// <exception cref="SerializationException">Unable process the service response.</exception>
+        /// <exception cref="LogicTokenProviderException">Unable to issue an authorization token.</exception>
+        /// <exception cref="CvrConfigurationException">Invalid CVR configuration details.</exception>
+        public async Task<ProductionUnitDetail> GetProductionUnitDetailByIdAsync(string objectId)
+        {
+            var client = this.CreateClient();
+            using (var response = await client.GetProductionUnitDetailByIdWithHttpMessagesAsync(
+                                subscriptionId: this.options.SubscriptionId,
+                                id: objectId,
+                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return (ProductionUnitDetail)response.Body;
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
@@ -149,8 +201,8 @@ namespace Kmd.Logic.Cvr.Client
         /// <summary>
         /// Subscribes for CVR events by Object ID.
         /// </summary>
-        /// <param name="objectId">The CVR Object ID.</param>
-        /// <returns>The Saved Cvr Object ID.</returns>
+        /// <param name="objectId">The Company's Object ID.</param>
+        /// <returns>True in case of subscribe.</returns>
         /// <exception cref="ValidationException"> When subscriptionId or The CVR Object ID is null.</exception>
         /// <exception cref="SerializationException">Unable process the service response.</exception>
         public async Task<bool> SubscribeByIdAsync(string objectId)
@@ -171,7 +223,7 @@ namespace Kmd.Logic.Cvr.Client
         /// </summary>
         /// <param name="objectId">The CVR Object ID.</param>
         /// <returns>True in case of unsubscribe.</returns>
-        /// <exception cref="ValidationException"> When subscriptionId or CVR number is null.</exception>
+        /// <exception cref="ValidationException"> When subscriptionId or object id is null.</exception>
         public async Task<bool> UnsubscribeByIdAsync(string objectId)
         {
             var client = this.CreateClient();
@@ -188,18 +240,18 @@ namespace Kmd.Logic.Cvr.Client
         /// <summary>
         /// Gets company events for the nominated period.
         /// </summary>
-        /// <param name="dateFom">Query events from this date and time.</param>
+        /// <param name="dateFrom">Query events from this date and time.</param>
         /// <param name="dateTo">Query events to this date and time.</param>
         /// <param name="pageNo">The page number to query, starting at 1.</param>
         /// <param name="pageSize">The maximum number of results to return.</param>
         /// <returns>List of citizen records.</returns>
-        public async Task<IList<CompanyEvent>> GetAllCompanyEventsAsync(DateTime dateFom, DateTime dateTo, int pageNo, int pageSize)
+        public async Task<IList<CompanyEvent>> GetAllCompanyEventsAsync(DateTime dateFrom, DateTime dateTo, int pageNo, int pageSize)
         {
             var client = this.CreateClient();
 
             using (var response = await client.GetEventsWithHttpMessagesAsync(
                 subscriptionId: this.options.SubscriptionId,
-                dateFrom: dateFom,
+                dateFrom: dateFrom,
                 dateTo: dateTo,
                 configurationId: this.options.CvrConfigurationId,
                 pageNo: pageNo,
@@ -209,10 +261,8 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return response.Body as IList<CompanyEvent>;
-
                     case System.Net.HttpStatusCode.NotFound:
                         return null;
-
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
@@ -222,18 +272,18 @@ namespace Kmd.Logic.Cvr.Client
         /// <summary>
         /// Gets Subscribed company events for the nominated period.
         /// </summary>
-        /// <param name="dateFom">Query events from this date and time.</param>
+        /// <param name="dateFrom">Query events from this date and time.</param>
         /// <param name="dateTo">Query events to this date and time.</param>
         /// <param name="pageNo">The page number to query, starting at 1.</param>
         /// <param name="pageSize">The maximum number of results to return.</param>
         /// <returns>Subscribed citizen records.</returns>
-        public async Task<SubscribedCompanyEvents> GetSubscribedCompanyEventsAsync(DateTime dateFom, DateTime dateTo, int pageNo, int pageSize)
+        public async Task<SubscribedCompanyEvents> GetSubscribedCompanyEventsAsync(DateTime dateFrom, DateTime dateTo, int pageNo, int pageSize)
         {
             var client = this.CreateClient();
 
             using (var response = await client.GetSubscribedEventsWithHttpMessagesAsync(
                 subscriptionId: this.options.SubscriptionId,
-                dateFrom: dateFom,
+                dateFrom: dateFrom,
                 dateTo: dateTo,
                 configurationId: this.options.CvrConfigurationId,
                 pageNo: pageNo,
@@ -243,10 +293,8 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return response.Body as SubscribedCompanyEvents;
-
                     case System.Net.HttpStatusCode.NotFound:
                         return null;
-
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }

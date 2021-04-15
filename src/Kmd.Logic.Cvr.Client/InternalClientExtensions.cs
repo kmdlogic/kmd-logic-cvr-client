@@ -67,6 +67,54 @@ namespace Kmd.Logic.Cvr.Client
             }
 
             /// <summary>
+            /// Gets Production unit detail by object id.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Logic subscription ID
+            /// </param>
+            /// <param name='id'>
+            /// The company's production unit object Id. This may differ between providers.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            public static object GetProductionUnitDetailById(this IInternalClient operations, System.Guid subscriptionId, string id, System.Guid? configurationId = default(System.Guid?))
+            {
+                return operations.GetProductionUnitDetailByIdAsync(subscriptionId, id, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets Production unit detail by object id.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Logic subscription ID
+            /// </param>
+            /// <param name='id'>
+            /// The company's production unit object Id. This may differ between providers.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetProductionUnitDetailByIdAsync(this IInternalClient operations, System.Guid subscriptionId, string id, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetProductionUnitDetailByIdWithHttpMessagesAsync(subscriptionId, id, configurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Gets Company information by CVR number
             /// </summary>
             /// <param name='operations'>
@@ -115,6 +163,54 @@ namespace Kmd.Logic.Cvr.Client
             }
 
             /// <summary>
+            /// Gets Company information by object Id.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Logic subscription ID
+            /// </param>
+            /// <param name='id'>
+            /// The company object Id. This may differ between providers.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            public static object GetById(this IInternalClient operations, System.Guid subscriptionId, string id, System.Guid? configurationId = default(System.Guid?))
+            {
+                return operations.GetByIdAsync(subscriptionId, id, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets Company information by object Id.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Logic subscription ID
+            /// </param>
+            /// <param name='id'>
+            /// The company object Id. This may differ between providers.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier that represents CVR environment and associated configuration
+            /// which this request will be sent with.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetByIdAsync(this IInternalClient operations, System.Guid subscriptionId, string id, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetByIdWithHttpMessagesAsync(subscriptionId, id, configurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Gets Production Units information by CVR number
             /// </summary>
             /// <param name='operations'>
@@ -130,9 +226,9 @@ namespace Kmd.Logic.Cvr.Client
             /// Identifier that represents CVR environment and associated configuration
             /// which this request will be sent with.
             /// </param>
-            public static object GetProductionUnitByCvr(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?))
+            public static object GetProductionUnitsByCvr(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?))
             {
-                return operations.GetProductionUnitByCvrAsync(subscriptionId, cvr, configurationId).GetAwaiter().GetResult();
+                return operations.GetProductionUnitsByCvrAsync(subscriptionId, cvr, configurationId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -154,9 +250,9 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetProductionUnitByCvrAsync(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetProductionUnitsByCvrAsync(this IInternalClient operations, System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetProductionUnitByCvrWithHttpMessagesAsync(subscriptionId, cvr, configurationId, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetProductionUnitsByCvrWithHttpMessagesAsync(subscriptionId, cvr, configurationId, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
