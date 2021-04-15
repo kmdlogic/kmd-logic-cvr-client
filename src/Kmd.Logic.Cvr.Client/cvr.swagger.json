@@ -67,6 +67,68 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/cvr/production-unit-detail-by-id/{id}": {
+      "get": {
+        "tags": [
+          "Cvr"
+        ],
+        "summary": "Gets Production unit detail by object id.",
+        "operationId": "GetProductionUnitDetailById",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Logic subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The company's production unit object Id. This may differ between providers.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationId",
+            "in": "query",
+            "description": "Identifier that represents CVR environment and associated configuration which this request will be sent with.",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductionUnitDetail"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/cvr/by-cvr/{cvr}": {
       "get": {
         "tags": [
@@ -129,13 +191,75 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/cvr/by-id/{id}": {
+      "get": {
+        "tags": [
+          "Cvr"
+        ],
+        "summary": "Gets Company information by object Id.",
+        "operationId": "GetById",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Logic subscription ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The company object Id. This may differ between providers.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationId",
+            "in": "query",
+            "description": "Identifier that represents CVR environment and associated configuration which this request will be sent with.",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/cvr/production-units/by-cvr/{cvr}": {
       "get": {
         "tags": [
           "Cvr"
         ],
         "summary": "Gets Production Units information by CVR number",
-        "operationId": "GetProductionUnitByCvr",
+        "operationId": "GetProductionUnitsByCvr",
         "produces": [
           "application/json",
           "text/json"

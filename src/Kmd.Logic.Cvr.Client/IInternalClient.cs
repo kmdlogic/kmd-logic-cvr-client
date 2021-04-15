@@ -63,6 +63,28 @@ namespace Kmd.Logic.Cvr.Client
         Task<HttpOperationResponse<object>> GetProductionUnitDetailByPNumberWithHttpMessagesAsync(System.Guid subscriptionId, string pNumber, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Gets Production unit detail by object id.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Logic subscription ID
+        /// </param>
+        /// <param name='id'>
+        /// The company's production unit object Id. This may differ between
+        /// providers.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier that represents CVR environment and associated
+        /// configuration which this request will be sent with.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetProductionUnitDetailByIdWithHttpMessagesAsync(System.Guid subscriptionId, string id, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Gets Company information by CVR number
         /// </summary>
         /// <param name='subscriptionId'>
@@ -84,6 +106,27 @@ namespace Kmd.Logic.Cvr.Client
         Task<HttpOperationResponse<object>> GetByCvrWithHttpMessagesAsync(System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Gets Company information by object Id.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Logic subscription ID
+        /// </param>
+        /// <param name='id'>
+        /// The company object Id. This may differ between providers.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier that represents CVR environment and associated
+        /// configuration which this request will be sent with.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetByIdWithHttpMessagesAsync(System.Guid subscriptionId, string id, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Gets Production Units information by CVR number
         /// </summary>
         /// <param name='subscriptionId'>
@@ -102,7 +145,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> GetProductionUnitByCvrWithHttpMessagesAsync(System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object>> GetProductionUnitsByCvrWithHttpMessagesAsync(System.Guid subscriptionId, string cvr, System.Guid? configurationId = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets Company events for the nominated period

@@ -97,6 +97,12 @@ namespace Kmd.Logic.Cvr.Client.Sample
 
                 Log.Information("Company data: {@Company}", company);
 
+                Log.Information("Fetching company by id {Id} using configuration {Name}", company.Id, cvrProvider.Name);
+
+                var companyById = await cvrClient.GetCompanyByIdAsync(company.Id).ConfigureAwait(false);
+
+                Log.Information("Fetched one company using two methods: {Success}", company.CvrNumber == companyById.CvrNumber);
+
                 Log.Information("Fetching Production Units for CVR number {Cvr}", configuration.CvrNumber);
 
                 var productionUnits = await cvrClient.GetProductionUnitsAsync(configuration.CvrNumber).ConfigureAwait(false);
@@ -113,7 +119,11 @@ namespace Kmd.Logic.Cvr.Client.Sample
 
                 var productionUnitDetail = await cvrClient.GetProductionUnitDetailAsync(productionUnits[0].PNumber).ConfigureAwait(false);
 
-                Log.Information("Production Unit Detail data: {@ProductionUnitDetail}", productionUnitDetail);
+                Log.Information("Fetching Production Unit Detail for object id {Id}", productionUnitDetail.Id);
+
+                var productionUnitById = await cvrClient.GetProductionUnitDetailByIdAsync(productionUnitDetail.Id).ConfigureAwait(false);
+
+                Log.Information("Fetched one production unit using two methods: {Success}", productionUnitDetail.PNumber == productionUnitById.PNumber);
 
                 Log.Information("Fetching company events using configuration {Name}", cvrProvider.Name);
                 var events = await cvrClient.GetAllCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, 1, 100).ConfigureAwait(false);

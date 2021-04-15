@@ -1,3 +1,6 @@
+1.6.0
+* Getting Company and Production Unit by Object Id.
+
 1.5.0
 * Updated CVR client with adding ObjectID to the GET responses.
 
