@@ -736,11 +736,16 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='certificatePassword'>
             /// </param>
-            /// <param name='municipalityCvr'>
+            /// <param name='serviceAgreementUuid'>
             /// </param>
-            public static ServicePlatformCvrProviderConfiguration CreateServicePlatformConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string))
+            /// <param name='userSystemUuid'>
+            /// </param>
+            /// <param name='userUuid'>
+            /// All supported UserUuids can be fetched using '/municipalities' endpoint.
+            /// </param>
+            public static ServicePlatformCvrProviderConfiguration CreateServicePlatformConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string serviceAgreementUuid = default(string), string userSystemUuid = default(string), string userUuid = default(string))
             {
-                return operations.CreateServicePlatformConfigurationAsync(subscriptionId, name, environment, certificate, certificatePassword, municipalityCvr).GetAwaiter().GetResult();
+                return operations.CreateServicePlatformConfigurationAsync(subscriptionId, name, environment, certificate, certificatePassword, serviceAgreementUuid, userSystemUuid, userUuid).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -757,14 +762,19 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='certificatePassword'>
             /// </param>
-            /// <param name='municipalityCvr'>
+            /// <param name='serviceAgreementUuid'>
+            /// </param>
+            /// <param name='userSystemUuid'>
+            /// </param>
+            /// <param name='userUuid'>
+            /// All supported UserUuids can be fetched using '/municipalities' endpoint.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ServicePlatformCvrProviderConfiguration> CreateServicePlatformConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ServicePlatformCvrProviderConfiguration> CreateServicePlatformConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string serviceAgreementUuid = default(string), string userSystemUuid = default(string), string userUuid = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.CreateServicePlatformConfigurationWithHttpMessagesAsync(subscriptionId, name, environment, certificate, certificatePassword, municipalityCvr, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.CreateServicePlatformConfigurationWithHttpMessagesAsync(subscriptionId, name, environment, certificate, certificatePassword, serviceAgreementUuid, userSystemUuid, userUuid, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -786,11 +796,16 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='certificatePassword'>
             /// </param>
-            /// <param name='municipalityCvr'>
+            /// <param name='serviceAgreementUuid'>
             /// </param>
-            public static ServicePlatformCvrProviderConfiguration UpdateServicePlatformConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string))
+            /// <param name='userSystemUuid'>
+            /// </param>
+            /// <param name='userUuid'>
+            /// All supported UserUuids can be fetched using '/municipalities' endpoint.
+            /// </param>
+            public static ServicePlatformCvrProviderConfiguration UpdateServicePlatformConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string serviceAgreementUuid = default(string), string userSystemUuid = default(string), string userUuid = default(string))
             {
-                return operations.UpdateServicePlatformConfigurationAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, municipalityCvr).GetAwaiter().GetResult();
+                return operations.UpdateServicePlatformConfigurationAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, serviceAgreementUuid, userSystemUuid, userUuid).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -809,14 +824,19 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='certificatePassword'>
             /// </param>
-            /// <param name='municipalityCvr'>
+            /// <param name='serviceAgreementUuid'>
+            /// </param>
+            /// <param name='userSystemUuid'>
+            /// </param>
+            /// <param name='userUuid'>
+            /// All supported UserUuids can be fetched using '/municipalities' endpoint.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ServicePlatformCvrProviderConfiguration> UpdateServicePlatformConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ServicePlatformCvrProviderConfiguration> UpdateServicePlatformConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string serviceAgreementUuid = default(string), string userSystemUuid = default(string), string userUuid = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.UpdateServicePlatformConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, municipalityCvr, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.UpdateServicePlatformConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, name, environment, certificate, certificatePassword, serviceAgreementUuid, userSystemUuid, userUuid, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

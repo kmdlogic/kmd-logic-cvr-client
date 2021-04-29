@@ -31,6 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{CF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client.Sample", "sample\Kmd.Logic.Cvr.Client.Sample\Kmd.Logic.Cvr.Client.Sample.csproj", "{DCF57759-D612-48F9-A128-5F535FEAACC6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{760F3657-8A64-4FFC-9FF9-2B7A8CE9BCA5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

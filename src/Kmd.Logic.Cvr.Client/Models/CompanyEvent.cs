@@ -24,8 +24,8 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         /// <param name="id">The event's object Id. This may differ between
         /// providers.</param>
-        /// <param name="objectType">The event's object type. This may
-        /// differ between providers.</param>
+        /// <param name="objectType">The event's object type. This may differ
+        /// between providers.</param>
         /// <param name="action">A description of the action that occurred.
         /// This may differ between providers.</param>
         /// <param name="actionDateTime">The date and time the action

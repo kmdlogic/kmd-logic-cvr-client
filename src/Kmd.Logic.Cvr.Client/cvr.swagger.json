@@ -984,9 +984,23 @@
             "type": "string"
           },
           {
-            "name": "municipalityCvr",
+            "name": "serviceAgreementUuid",
             "in": "formData",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userSystemUuid",
+            "in": "formData",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userUuid",
+            "in": "formData",
+            "description": "All supported UserUuids can be fetched using '/municipalities' endpoint.",
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1060,9 +1074,23 @@
             "type": "string"
           },
           {
-            "name": "municipalityCvr",
+            "name": "serviceAgreementUuid",
             "in": "formData",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userSystemUuid",
+            "in": "formData",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userUuid",
+            "in": "formData",
+            "description": "All supported UserUuids can be fetched using '/municipalities' endpoint.",
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1396,6 +1424,18 @@
           ]
         },
         "municipalityCvr": {
+          "type": "string"
+        },
+        "serviceAgreementUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "userSystemUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "userUuid": {
+          "format": "uuid",
           "type": "string"
         }
       }

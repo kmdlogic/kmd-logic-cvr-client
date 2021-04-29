@@ -2976,7 +2976,12 @@ namespace Kmd.Logic.Cvr.Client
         /// </param>
         /// <param name='certificatePassword'>
         /// </param>
-        /// <param name='municipalityCvr'>
+        /// <param name='serviceAgreementUuid'>
+        /// </param>
+        /// <param name='userSystemUuid'>
+        /// </param>
+        /// <param name='userUuid'>
+        /// All supported UserUuids can be fetched using '/municipalities' endpoint.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -2993,7 +2998,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<ServicePlatformCvrProviderConfiguration>> CreateServicePlatformConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<ServicePlatformCvrProviderConfiguration>> CreateServicePlatformConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string serviceAgreementUuid = default(string), string userSystemUuid = default(string), string userUuid = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3007,7 +3012,9 @@ namespace Kmd.Logic.Cvr.Client
                 tracingParameters.Add("environment", environment);
                 tracingParameters.Add("certificate", certificate);
                 tracingParameters.Add("certificatePassword", certificatePassword);
-                tracingParameters.Add("municipalityCvr", municipalityCvr);
+                tracingParameters.Add("serviceAgreementUuid", serviceAgreementUuid);
+                tracingParameters.Add("userSystemUuid", userSystemUuid);
+                tracingParameters.Add("userUuid", userUuid);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "CreateServicePlatformConfiguration", tracingParameters);
             }
@@ -3075,10 +3082,20 @@ namespace Kmd.Logic.Cvr.Client
                 StringContent _certificatePassword = new StringContent(certificatePassword, System.Text.Encoding.UTF8);
                 _multiPartContent.Add(_certificatePassword, "certificatePassword");
             }
-            if (municipalityCvr != null)
+            if (serviceAgreementUuid != null)
             {
-                StringContent _municipalityCvr = new StringContent(municipalityCvr, System.Text.Encoding.UTF8);
-                _multiPartContent.Add(_municipalityCvr, "municipalityCvr");
+                StringContent _serviceAgreementUuid = new StringContent(serviceAgreementUuid, System.Text.Encoding.UTF8);
+                _multiPartContent.Add(_serviceAgreementUuid, "serviceAgreementUuid");
+            }
+            if (userSystemUuid != null)
+            {
+                StringContent _userSystemUuid = new StringContent(userSystemUuid, System.Text.Encoding.UTF8);
+                _multiPartContent.Add(_userSystemUuid, "userSystemUuid");
+            }
+            if (userUuid != null)
+            {
+                StringContent _userUuid = new StringContent(userUuid, System.Text.Encoding.UTF8);
+                _multiPartContent.Add(_userUuid, "userUuid");
             }
             _httpRequest.Content = _multiPartContent;
             // Set Credentials
@@ -3165,7 +3182,12 @@ namespace Kmd.Logic.Cvr.Client
         /// </param>
         /// <param name='certificatePassword'>
         /// </param>
-        /// <param name='municipalityCvr'>
+        /// <param name='serviceAgreementUuid'>
+        /// </param>
+        /// <param name='userSystemUuid'>
+        /// </param>
+        /// <param name='userUuid'>
+        /// All supported UserUuids can be fetched using '/municipalities' endpoint.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -3182,7 +3204,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<ServicePlatformCvrProviderConfiguration>> UpdateServicePlatformConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string municipalityCvr = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<ServicePlatformCvrProviderConfiguration>> UpdateServicePlatformConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string name = default(string), string environment = default(string), Stream certificate = default(Stream), string certificatePassword = default(string), string serviceAgreementUuid = default(string), string userSystemUuid = default(string), string userUuid = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3197,7 +3219,9 @@ namespace Kmd.Logic.Cvr.Client
                 tracingParameters.Add("environment", environment);
                 tracingParameters.Add("certificate", certificate);
                 tracingParameters.Add("certificatePassword", certificatePassword);
-                tracingParameters.Add("municipalityCvr", municipalityCvr);
+                tracingParameters.Add("serviceAgreementUuid", serviceAgreementUuid);
+                tracingParameters.Add("userSystemUuid", userSystemUuid);
+                tracingParameters.Add("userUuid", userUuid);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "UpdateServicePlatformConfiguration", tracingParameters);
             }
@@ -3266,10 +3290,20 @@ namespace Kmd.Logic.Cvr.Client
                 StringContent _certificatePassword = new StringContent(certificatePassword, System.Text.Encoding.UTF8);
                 _multiPartContent.Add(_certificatePassword, "certificatePassword");
             }
-            if (municipalityCvr != null)
+            if (serviceAgreementUuid != null)
             {
-                StringContent _municipalityCvr = new StringContent(municipalityCvr, System.Text.Encoding.UTF8);
-                _multiPartContent.Add(_municipalityCvr, "municipalityCvr");
+                StringContent _serviceAgreementUuid = new StringContent(serviceAgreementUuid, System.Text.Encoding.UTF8);
+                _multiPartContent.Add(_serviceAgreementUuid, "serviceAgreementUuid");
+            }
+            if (userSystemUuid != null)
+            {
+                StringContent _userSystemUuid = new StringContent(userSystemUuid, System.Text.Encoding.UTF8);
+                _multiPartContent.Add(_userSystemUuid, "userSystemUuid");
+            }
+            if (userUuid != null)
+            {
+                StringContent _userUuid = new StringContent(userUuid, System.Text.Encoding.UTF8);
+                _multiPartContent.Add(_userUuid, "userUuid");
             }
             _httpRequest.Content = _multiPartContent;
             // Set Credentials
