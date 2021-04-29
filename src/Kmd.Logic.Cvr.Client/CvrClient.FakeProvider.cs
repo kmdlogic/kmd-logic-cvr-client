@@ -37,7 +37,6 @@ namespace Kmd.Logic.Cvr.Client
         /// <summary>
         /// Updates Fake provider CVR configuration.
         /// </summary>
-        /// <param name="cvrClient">CVR Client.</param>
         /// <param name="configurationId">ID of the configuration.</param>
         /// <param name="name">Name of the configuration.</param>
         /// <returns>Created configuration.</returns>
@@ -49,7 +48,7 @@ namespace Kmd.Logic.Cvr.Client
 
             var client = this.CreateClient();
             using (var response = await client.UpdateFakeProviderConfigurationWithHttpMessagesAsync(
-                subscriptionId: _options.SubscriptionId,
+                subscriptionId: this._options.SubscriptionId,
                 configurationId: configurationId,
                 name: name).ConfigureAwait(false))
             {
