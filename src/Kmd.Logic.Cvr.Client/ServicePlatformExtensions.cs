@@ -19,6 +19,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="userSystemUuid">User System UUID of the calling system.</param>
         /// <param name="userUuid">User UUID of the municipality.</param>
         /// <returns>Created configuration.</returns>
+        /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
         public static async Task<ServicePlatformCvrProviderConfiguration> CreateServicePlatformConfiguration(
             this CvrClient cvrClient,
             string name,
@@ -29,12 +30,12 @@ namespace Kmd.Logic.Cvr.Client
             Guid userSystemUuid,
             Guid userUuid)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
-            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentException($"'{nameof(certificatePassword)}' cannot be null or empty.", nameof(certificatePassword));
-            if (serviceAgreementUuid == Guid.Empty) throw new ArgumentException($"'{nameof(serviceAgreementUuid)}' cannot be empty.", nameof(serviceAgreementUuid));
-            if (userSystemUuid == Guid.Empty) throw new ArgumentException($"'{nameof(userSystemUuid)}' cannot be empty.", nameof(userSystemUuid));
-            if (userUuid == Guid.Empty) throw new ArgumentException($"'{nameof(userUuid)}' cannot be empty.", nameof(userUuid));
+            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
+            if (serviceAgreementUuid == Guid.Empty) throw new ArgumentNullException(nameof(serviceAgreementUuid));
+            if (userSystemUuid == Guid.Empty) throw new ArgumentNullException(nameof(userSystemUuid));
+            if (userUuid == Guid.Empty) throw new ArgumentNullException(nameof(userUuid));
 
             var client = cvrClient.CreateClient();
             var options = cvrClient.GetOptions();
@@ -75,6 +76,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="userSystemUuid">User System UUID of the calling system.</param>
         /// <param name="userUuid">User UUID of the municipality.</param>
         /// <returns>Created configuration.</returns>
+        /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
         public static async Task<ServicePlatformCvrProviderConfiguration> UpdateServicePlatformConfiguration(
             this CvrClient cvrClient,
             Guid configurationId,
@@ -86,13 +88,13 @@ namespace Kmd.Logic.Cvr.Client
             Guid userSystemUuid,
             Guid userUuid)
         {
-            if (configurationId == Guid.Empty) throw new ArgumentException($"'{nameof(configurationId)}' cannot be empty.", nameof(configurationId));
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
+            if (configurationId == Guid.Empty) throw new ArgumentNullException(nameof(configurationId));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
-            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentException($"'{nameof(certificatePassword)}' cannot be null or empty.", nameof(certificatePassword));
-            if (serviceAgreementUuid == Guid.Empty) throw new ArgumentException($"'{nameof(serviceAgreementUuid)}' cannot be empty.", nameof(serviceAgreementUuid));
-            if (userSystemUuid == Guid.Empty) throw new ArgumentException($"'{nameof(userSystemUuid)}' cannot be empty.", nameof(userSystemUuid));
-            if (userUuid == Guid.Empty) throw new ArgumentException($"'{nameof(userUuid)}' cannot be empty.", nameof(userUuid));
+            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
+            if (serviceAgreementUuid == Guid.Empty) throw new ArgumentNullException(nameof(serviceAgreementUuid));
+            if (userSystemUuid == Guid.Empty) throw new ArgumentNullException(nameof(userSystemUuid));
+            if (userUuid == Guid.Empty) throw new ArgumentNullException(nameof(userUuid));
 
             var client = cvrClient.CreateClient();
             var options = cvrClient.GetOptions();

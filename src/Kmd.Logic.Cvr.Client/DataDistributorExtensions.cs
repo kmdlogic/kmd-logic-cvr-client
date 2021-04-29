@@ -16,6 +16,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="certificate">Stream with certificate.</param>
         /// <param name="certificatePassword">Password to the certificate.</param>
         /// <returns>Created configuration.</returns>
+        /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
         public static async Task<CvrProviderConfiguration> CreateDataDistributorConfiguration(
             this CvrClient cvrClient,
             string name,
@@ -23,9 +24,9 @@ namespace Kmd.Logic.Cvr.Client
             Stream certificate,
             string certificatePassword)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
-            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentException($"'{nameof(certificatePassword)}' cannot be null or empty.", nameof(certificatePassword));
+            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
 
             var client = cvrClient.CreateClient();
             var options = cvrClient.GetOptions();
@@ -60,6 +61,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="certificate">Stream with certificate.</param>
         /// <param name="certificatePassword">Password to the certificate.</param>
         /// <returns>Created configuration.</returns>
+        /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
         public static async Task<CvrProviderConfiguration> UpdateDataDistributorConfiguration(
             this CvrClient cvrClient,
             Guid configurationId,
@@ -68,10 +70,10 @@ namespace Kmd.Logic.Cvr.Client
             Stream certificate,
             string certificatePassword)
         {
-            if (configurationId == Guid.Empty) throw new ArgumentException($"'{nameof(configurationId)}' cannot be empty.", nameof(configurationId));
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
+            if (configurationId == Guid.Empty) throw new ArgumentNullException(nameof(configurationId));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
-            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentException($"'{nameof(certificatePassword)}' cannot be null or empty.", nameof(certificatePassword));
+            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
 
             var client = cvrClient.CreateClient();
             var options = cvrClient.GetOptions();

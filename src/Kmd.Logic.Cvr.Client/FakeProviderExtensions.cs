@@ -12,10 +12,13 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="cvrClient">CVR Client.</param>
         /// <param name="name">Name of the configuration.</param>
         /// <returns>Created configuration.</returns>
+        /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
         public static async Task<CvrFakeProviderConfiguration> CreateFakeProviderConfiguration(
             this CvrClient cvrClient,
             string name)
         {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+
             var client = cvrClient.CreateClient();
             var options = cvrClient.GetOptions();
 
@@ -43,9 +46,11 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="configurationId">ID of the configuration.</param>
         /// <param name="name">Name of the configuration.</param>
         /// <returns>Created configuration.</returns>
+        /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
         public static async Task<CvrFakeProviderConfiguration> UpdateFakeProviderConfiguration(this CvrClient cvrClient, Guid configurationId, string name)
         {
-            if (configurationId == Guid.Empty) throw new ArgumentException($"'{nameof(configurationId)}' cannot be empty.", nameof(configurationId));
+            if (configurationId == Guid.Empty) throw new ArgumentNullException(nameof(configurationId));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
             var client = cvrClient.CreateClient();
             var options = cvrClient.GetOptions();
@@ -59,8 +64,6 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return response.Body;
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
                     default:
                         var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
                         throw new CvrConfigurationException(responseMessage);
