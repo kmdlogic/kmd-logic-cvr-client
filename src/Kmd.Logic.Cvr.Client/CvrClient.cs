@@ -302,6 +302,96 @@ namespace Kmd.Logic.Cvr.Client
         }
 
         /// <summary>
+        /// Creates CVR configuration using Data Fordeler provider.
+        /// </summary>
+        /// <param name="parameters">Configuration parameters.</param>
+        /// <returns>Created configuration.</returns>
+        public async Task<CvrProviderConfiguration> AddOrUpdateDataFordelerConfiguration(AddOrUpdateDataFordelerConfigurationParameters parameters)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.UpdateDataDistributorCvrConfigurationWithHttpMessagesAsync(
+                subscriptionId: this.options.SubscriptionId,
+                configurationId: parameters.ConfigurationId ?? default,
+                name: parameters.Name,
+                environment: parameters.Environment.ToString("g"),
+                certificate: parameters.Certificate,
+                certificatePassword: parameters.CertificatePassword).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return response.Body;
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+                    default:
+                        var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        throw new CvrConfigurationException(responseMessage);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates CVR configuration using Service Platform provider.
+        /// </summary>
+        /// <param name="parameters">Configuration parameters.</param>
+        /// <returns>Created configuration.</returns>
+        public async Task<ServicePlatformCvrProviderConfiguration> AddOrUpdateServicePlatformConfiguration(AddOrUpdateServicePlatformConfigurationParameters parameters)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.UpdateServicePlatformConfigurationWithHttpMessagesAsync(
+                subscriptionId: this.options.SubscriptionId,
+                configurationId: parameters.ConfigurationId ?? default,
+                name: parameters.Name,
+                environment: parameters.Environment.ToString("g"),
+                certificate: parameters.Certificate,
+                certificatePassword: parameters.CertificatePassword,
+                serviceAgreementUuid: parameters.ServiceAgreementUuid.ToString(),
+                userSystemUuid: parameters.UserSystemUuid.ToString(),
+                userUuid: parameters.UserUuid.ToString()).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return response.Body;
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+                    default:
+                        var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        throw new CvrConfigurationException(responseMessage);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates CVR configuration using Fake provider.
+        /// </summary>
+        /// <param name="parameters">Configuration parameters.</param>
+        /// <returns>Created configuration.</returns>
+        public async Task<CvrFakeProviderConfiguration> AddOrUpdateFakeProviderConfiguration(AddOrUpdateFakeProviderConfigurationParameters parameters)
+        {
+            var client = this.CreateClient();
+
+            using (var response = await client.UpdateFakeProviderConfigurationWithHttpMessagesAsync(
+                subscriptionId: this.options.SubscriptionId,
+                configurationId: parameters.ConfigurationId ?? default,
+                name: parameters.Name).ConfigureAwait(false))
+            {
+                switch (response.Response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return response.Body;
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+                    default:
+                        var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        throw new CvrConfigurationException(responseMessage);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or Intialize the instance of the <see cref="InternalClient"/> class.
         /// </summary>
         /// <returns>The instance of KMDLogicCVRServiceServiceAPI.</returns>

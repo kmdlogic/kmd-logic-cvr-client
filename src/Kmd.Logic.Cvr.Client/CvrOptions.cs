@@ -23,6 +23,6 @@ namespace Kmd.Logic.Cvr.Client
         /// <summary>
         /// Gets or sets the Logic CVR Configuration identifier.
         /// </summary>
-        public Guid CvrConfigurationId { get; set; }
+        public Guid? CvrConfigurationId { get; set; }
     }
 }

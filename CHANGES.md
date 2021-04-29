@@ -1,3 +1,6 @@
+1.7.0
+* Add or update configuration methods for all providers.
+
 1.6.0
 * Getting Company and Production Unit by Object Id.
 
