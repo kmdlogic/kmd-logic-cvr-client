@@ -21,10 +21,11 @@ namespace Kmd.Logic.Cvr.Client
     [SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "HttpClient is not owned by this class.")]
     public sealed class CvrClient
     {
-        private readonly HttpClient httpClient;
-        private readonly CvrOptions options;
-        private readonly LogicTokenProviderFactory tokenProviderFactory;
-        private InternalClient internalClient;
+        private readonly HttpClient _httpClient;
+        private readonly CvrOptions _options;
+        private readonly ITokenProviderFactory _tokenProviderFactory;
+
+        private InternalClient _internalClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CvrClient"/> class.
@@ -34,16 +35,9 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="options">The required configuration options.</param>
         public CvrClient(HttpClient httpClient, LogicTokenProviderFactory tokenProviderFactory, CvrOptions options)
         {
-            this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.tokenProviderFactory = tokenProviderFactory ?? throw new ArgumentNullException(nameof(tokenProviderFactory));
-
-#pragma warning disable CS0618 // Type or member is obsolete
-            if (string.IsNullOrEmpty(this.tokenProviderFactory.DefaultAuthorizationScope))
-            {
-                this.tokenProviderFactory.DefaultAuthorizationScope = "https://logicidentityprod.onmicrosoft.com/bb159109-0ccd-4b08-8d0d-80370cedda84/.default";
-            }
-#pragma warning restore CS0618 // Type or member is obsolete
+            this._httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            this._options = options ?? throw new ArgumentNullException(nameof(options));
+            this._tokenProviderFactory = tokenProviderFactory ?? throw new ArgumentNullException(nameof(tokenProviderFactory));
         }
 
         /// <summary>
@@ -59,9 +53,9 @@ namespace Kmd.Logic.Cvr.Client
         {
             var client = this.CreateClient();
             using (var response = await client.GetByCvrWithHttpMessagesAsync(
-                                subscriptionId: this.options.SubscriptionId,
+                                subscriptionId: this._options.SubscriptionId,
                                 cvr: cvr,
-                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+                                configurationId: this._options.CvrConfigurationId).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
@@ -88,9 +82,9 @@ namespace Kmd.Logic.Cvr.Client
         {
             var client = this.CreateClient();
             using (var response = await client.GetByIdWithHttpMessagesAsync(
-                                subscriptionId: this.options.SubscriptionId,
+                                subscriptionId: this._options.SubscriptionId,
                                 id: objectId,
-                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+                                configurationId: this._options.CvrConfigurationId).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
@@ -114,7 +108,7 @@ namespace Kmd.Logic.Cvr.Client
         {
             var client = this.CreateClient();
 
-            return await client.GetAllCvrConfigurationsAsync(subscriptionId: this.options.SubscriptionId).ConfigureAwait(false);
+            return await client.GetAllCvrConfigurationsAsync(subscriptionId: this._options.SubscriptionId).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -130,9 +124,9 @@ namespace Kmd.Logic.Cvr.Client
         {
             var client = this.CreateClient();
             using (var response = await client.GetProductionUnitsByCvrWithHttpMessagesAsync(
-                                subscriptionId: this.options.SubscriptionId,
+                                subscriptionId: this._options.SubscriptionId,
                                 cvr: cvr,
-                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+                                configurationId: this._options.CvrConfigurationId).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
@@ -157,9 +151,9 @@ namespace Kmd.Logic.Cvr.Client
         {
             var client = this.CreateClient();
             using (var response = await client.GetProductionUnitDetailByPNumberWithHttpMessagesAsync(
-                                subscriptionId: this.options.SubscriptionId,
+                                subscriptionId: this._options.SubscriptionId,
                                 pNumber: pNumber,
-                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+                                configurationId: this._options.CvrConfigurationId).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
@@ -184,9 +178,9 @@ namespace Kmd.Logic.Cvr.Client
         {
             var client = this.CreateClient();
             using (var response = await client.GetProductionUnitDetailByIdWithHttpMessagesAsync(
-                                subscriptionId: this.options.SubscriptionId,
+                                subscriptionId: this._options.SubscriptionId,
                                 id: objectId,
-                                configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+                                configurationId: this._options.CvrConfigurationId).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
@@ -210,9 +204,9 @@ namespace Kmd.Logic.Cvr.Client
             var client = this.CreateClient();
 
             using (var response = await client.SubscribeByObjectIdWithHttpMessagesAsync(
-                 subscriptionId: this.options.SubscriptionId,
+                 subscriptionId: this._options.SubscriptionId,
                  objectId: objectId,
-                 request: new CvrSubscriptionRequest(this.options.CvrConfigurationId)).ConfigureAwait(false))
+                 request: new CvrSubscriptionRequest(this._options.CvrConfigurationId)).ConfigureAwait(false))
             {
                 return response.Response.IsSuccessStatusCode;
             }
@@ -229,9 +223,9 @@ namespace Kmd.Logic.Cvr.Client
             var client = this.CreateClient();
 
             using (var response = await client.UnsubscribeByObjectIdWithHttpMessagesAsync(
-                   subscriptionId: this.options.SubscriptionId,
+                   subscriptionId: this._options.SubscriptionId,
                    objectId: objectId,
-                   configurationId: this.options.CvrConfigurationId).ConfigureAwait(false))
+                   configurationId: this._options.CvrConfigurationId).ConfigureAwait(false))
             {
                 return response.Response.IsSuccessStatusCode;
             }
@@ -250,10 +244,10 @@ namespace Kmd.Logic.Cvr.Client
             var client = this.CreateClient();
 
             using (var response = await client.GetEventsWithHttpMessagesAsync(
-                subscriptionId: this.options.SubscriptionId,
+                subscriptionId: this._options.SubscriptionId,
                 dateFrom: dateFrom,
                 dateTo: dateTo,
-                configurationId: this.options.CvrConfigurationId,
+                configurationId: this._options.CvrConfigurationId,
                 pageNo: pageNo,
                 pageSize: pageSize).ConfigureAwait(false))
             {
@@ -282,10 +276,10 @@ namespace Kmd.Logic.Cvr.Client
             var client = this.CreateClient();
 
             using (var response = await client.GetSubscribedEventsWithHttpMessagesAsync(
-                subscriptionId: this.options.SubscriptionId,
+                subscriptionId: this._options.SubscriptionId,
                 dateFrom: dateFrom,
                 dateTo: dateTo,
-                configurationId: this.options.CvrConfigurationId,
+                configurationId: this._options.CvrConfigurationId,
                 pageNo: pageNo,
                 pageSize: pageSize).ConfigureAwait(false))
             {
@@ -302,114 +296,29 @@ namespace Kmd.Logic.Cvr.Client
         }
 
         /// <summary>
-        /// Creates CVR configuration using Data Fordeler provider.
-        /// </summary>
-        /// <param name="parameters">Configuration parameters.</param>
-        /// <returns>Created configuration.</returns>
-        public async Task<CvrProviderConfiguration> AddOrUpdateDataFordelerConfiguration(AddOrUpdateDataFordelerConfigurationParameters parameters)
-        {
-            var client = this.CreateClient();
-
-            using (var response = await client.UpdateDataDistributorCvrConfigurationWithHttpMessagesAsync(
-                subscriptionId: this.options.SubscriptionId,
-                configurationId: parameters.ConfigurationId ?? default,
-                name: parameters.Name,
-                environment: parameters.Environment.ToString("g"),
-                certificate: parameters.Certificate,
-                certificatePassword: parameters.CertificatePassword).ConfigureAwait(false))
-            {
-                switch (response.Response.StatusCode)
-                {
-                    case System.Net.HttpStatusCode.OK:
-                        return response.Body;
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
-                    default:
-                        var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        throw new CvrConfigurationException(responseMessage);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Creates CVR configuration using Service Platform provider.
-        /// </summary>
-        /// <param name="parameters">Configuration parameters.</param>
-        /// <returns>Created configuration.</returns>
-        public async Task<ServicePlatformCvrProviderConfiguration> AddOrUpdateServicePlatformConfiguration(AddOrUpdateServicePlatformConfigurationParameters parameters)
-        {
-            var client = this.CreateClient();
-
-            using (var response = await client.UpdateServicePlatformConfigurationWithHttpMessagesAsync(
-                subscriptionId: this.options.SubscriptionId,
-                configurationId: parameters.ConfigurationId ?? default,
-                name: parameters.Name,
-                environment: parameters.Environment.ToString("g"),
-                certificate: parameters.Certificate,
-                certificatePassword: parameters.CertificatePassword,
-                serviceAgreementUuid: parameters.ServiceAgreementUuid.ToString(),
-                userSystemUuid: parameters.UserSystemUuid.ToString(),
-                userUuid: parameters.UserUuid.ToString()).ConfigureAwait(false))
-            {
-                switch (response.Response.StatusCode)
-                {
-                    case System.Net.HttpStatusCode.OK:
-                        return response.Body;
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
-                    default:
-                        var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        throw new CvrConfigurationException(responseMessage);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Creates CVR configuration using Fake provider.
-        /// </summary>
-        /// <param name="parameters">Configuration parameters.</param>
-        /// <returns>Created configuration.</returns>
-        public async Task<CvrFakeProviderConfiguration> AddOrUpdateFakeProviderConfiguration(AddOrUpdateFakeProviderConfigurationParameters parameters)
-        {
-            var client = this.CreateClient();
-
-            using (var response = await client.UpdateFakeProviderConfigurationWithHttpMessagesAsync(
-                subscriptionId: this.options.SubscriptionId,
-                configurationId: parameters.ConfigurationId ?? default,
-                name: parameters.Name).ConfigureAwait(false))
-            {
-                switch (response.Response.StatusCode)
-                {
-                    case System.Net.HttpStatusCode.OK:
-                        return response.Body;
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
-                    default:
-                        var responseMessage = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        throw new CvrConfigurationException(responseMessage);
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or Intialize the instance of the <see cref="InternalClient"/> class.
         /// </summary>
         /// <returns>The instance of KMDLogicCVRServiceServiceAPI.</returns>
-        private InternalClient CreateClient()
+        internal InternalClient CreateClient()
         {
-            if (this.internalClient != null)
+            if (this._internalClient != null)
             {
-                return this.internalClient;
+                return this._internalClient;
             }
 
-            var tokenProvider = this.tokenProviderFactory.GetProvider(this.httpClient);
+            var tokenProvider = this._tokenProviderFactory.GetProvider(this._httpClient);
 
-            this.internalClient = new InternalClient(new TokenCredentials(tokenProvider))
+            this._internalClient = new InternalClient(new TokenCredentials(tokenProvider))
             {
-                BaseUri = this.options.CvrServiceUri,
+                BaseUri = this._options.CvrServiceUri,
             };
 
-            return this.internalClient;
+            return this._internalClient;
+        }
+
+        internal CvrOptions GetOptions()
+        {
+            return this._options;
         }
     }
 }
