@@ -4,26 +4,21 @@ using Kmd.Logic.Cvr.Client.Models;
 
 namespace Kmd.Logic.Cvr.Client
 {
-    public static class FakeProviderExtensions
+    public partial class CvrClient
     {
         /// <summary>
         /// Creates Fake provider CVR configuration.
         /// </summary>
-        /// <param name="cvrClient">CVR Client.</param>
         /// <param name="name">Name of the configuration.</param>
         /// <returns>Created configuration.</returns>
         /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
-        public static async Task<CvrFakeProviderConfiguration> CreateFakeProviderConfiguration(
-            this CvrClient cvrClient,
-            string name)
+        public async Task<CvrFakeProviderConfiguration> CreateFakeProviderConfiguration(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
-            var client = cvrClient.CreateClient();
-            var options = cvrClient.GetOptions();
-
+            var client = this.CreateClient();
             using (var response = await client.CreateFakeProviderConfigurationWithHttpMessagesAsync(
-                subscriptionId: options.SubscriptionId,
+                subscriptionId: this._options.SubscriptionId,
                 name: name).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
@@ -47,16 +42,14 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="name">Name of the configuration.</param>
         /// <returns>Created configuration.</returns>
         /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
-        public static async Task<CvrFakeProviderConfiguration> UpdateFakeProviderConfiguration(this CvrClient cvrClient, Guid configurationId, string name)
+        public async Task<CvrFakeProviderConfiguration> UpdateFakeProviderConfiguration(Guid configurationId, string name)
         {
             if (configurationId == Guid.Empty) throw new ArgumentNullException(nameof(configurationId));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
-            var client = cvrClient.CreateClient();
-            var options = cvrClient.GetOptions();
-
+            var client = this.CreateClient();
             using (var response = await client.UpdateFakeProviderConfigurationWithHttpMessagesAsync(
-                subscriptionId: options.SubscriptionId,
+                subscriptionId: _options.SubscriptionId,
                 configurationId: configurationId,
                 name: name).ConfigureAwait(false))
             {

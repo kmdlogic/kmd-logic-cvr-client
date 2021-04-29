@@ -5,50 +5,34 @@ using Kmd.Logic.Cvr.Client.Models;
 
 namespace Kmd.Logic.Cvr.Client
 {
-    public static class ServicePlatformExtensions
+    public partial class CvrClient
     {
         /// <summary>
-        /// Creates Service Platform CVR configuration.
+        /// Creates Data Distributor CVR configuration.
         /// </summary>
-        /// <param name="cvrClient">CVR Client.</param>
         /// <param name="name">Name of the configuration.</param>
         /// <param name="environment">Environment to use.</param>
         /// <param name="certificate">Stream with certificate.</param>
         /// <param name="certificatePassword">Password to the certificate.</param>
-        /// <param name="serviceAgreementUuid">Service Agreement UUID between calling system and Service Platform.</param>
-        /// <param name="userSystemUuid">User System UUID of the calling system.</param>
-        /// <param name="userUuid">User UUID of the municipality.</param>
         /// <returns>Created configuration.</returns>
         /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
-        public static async Task<ServicePlatformCvrProviderConfiguration> CreateServicePlatformConfiguration(
-            this CvrClient cvrClient,
+        public async Task<CvrProviderConfiguration> CreateDataDistributorConfiguration(
             string name,
             ProviderEnviroment environment,
             Stream certificate,
-            string certificatePassword,
-            Guid serviceAgreementUuid,
-            Guid userSystemUuid,
-            Guid userUuid)
+            string certificatePassword)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
             if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
-            if (serviceAgreementUuid == Guid.Empty) throw new ArgumentNullException(nameof(serviceAgreementUuid));
-            if (userSystemUuid == Guid.Empty) throw new ArgumentNullException(nameof(userSystemUuid));
-            if (userUuid == Guid.Empty) throw new ArgumentNullException(nameof(userUuid));
 
-            var client = cvrClient.CreateClient();
-            var options = cvrClient.GetOptions();
-
-            using (var response = await client.CreateServicePlatformConfigurationWithHttpMessagesAsync(
-                subscriptionId: options.SubscriptionId,
+            var client = this.CreateClient();
+            using (var response = await client.CreateDataDistributorCvrConfigurationWithHttpMessagesAsync(
+                subscriptionId: this._options.SubscriptionId,
                 name: name,
                 environment: environment.ToString("g"),
                 certificate: certificate,
-                certificatePassword: certificatePassword,
-                serviceAgreementUuid: serviceAgreementUuid.ToString(),
-                userSystemUuid: userSystemUuid.ToString(),
-                userUuid: userUuid.ToString()).ConfigureAwait(false))
+                certificatePassword: certificatePassword).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
@@ -64,51 +48,35 @@ namespace Kmd.Logic.Cvr.Client
         }
 
         /// <summary>
-        /// Updates Service Platform CVR configuration.
+        /// Updates Data Distributor CVR configuration.
         /// </summary>
-        /// <param name="cvrClient">CVR Client.</param>
         /// <param name="configurationId">ID of the configuration.</param>
         /// <param name="name">Name of the configuration.</param>
         /// <param name="environment">Environment to use.</param>
         /// <param name="certificate">Stream with certificate.</param>
         /// <param name="certificatePassword">Password to the certificate.</param>
-        /// <param name="serviceAgreementUuid">Service Agreement UUID between calling system and Service Platform.</param>
-        /// <param name="userSystemUuid">User System UUID of the calling system.</param>
-        /// <param name="userUuid">User UUID of the municipality.</param>
         /// <returns>Created configuration.</returns>
         /// <exception cref="ArgumentNullException">No parameter can be empty or null.</exception>
-        public static async Task<ServicePlatformCvrProviderConfiguration> UpdateServicePlatformConfiguration(
-            this CvrClient cvrClient,
+        public async Task<CvrProviderConfiguration> UpdateDataDistributorConfiguration(
             Guid configurationId,
             string name,
             ProviderEnviroment environment,
             Stream certificate,
-            string certificatePassword,
-            Guid serviceAgreementUuid,
-            Guid userSystemUuid,
-            Guid userUuid)
+            string certificatePassword)
         {
             if (configurationId == Guid.Empty) throw new ArgumentNullException(nameof(configurationId));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
             if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
-            if (serviceAgreementUuid == Guid.Empty) throw new ArgumentNullException(nameof(serviceAgreementUuid));
-            if (userSystemUuid == Guid.Empty) throw new ArgumentNullException(nameof(userSystemUuid));
-            if (userUuid == Guid.Empty) throw new ArgumentNullException(nameof(userUuid));
 
-            var client = cvrClient.CreateClient();
-            var options = cvrClient.GetOptions();
-
-            using (var response = await client.UpdateServicePlatformConfigurationWithHttpMessagesAsync(
-                subscriptionId: options.SubscriptionId,
+            var client = this.CreateClient();
+            using (var response = await client.UpdateDataDistributorCvrConfigurationWithHttpMessagesAsync(
+                subscriptionId: this._options.SubscriptionId,
                 configurationId: configurationId,
                 name: name,
                 environment: environment.ToString("g"),
                 certificate: certificate,
-                certificatePassword: certificatePassword,
-                serviceAgreementUuid: serviceAgreementUuid.ToString(),
-                userSystemUuid: userSystemUuid.ToString(),
-                userUuid: userUuid.ToString()).ConfigureAwait(false))
+                certificatePassword: certificatePassword).ConfigureAwait(false))
             {
                 switch (response.Response.StatusCode)
                 {
