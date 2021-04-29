@@ -69,7 +69,7 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 }
 
                 CvrProviderConfigurationModel cvrProvider;
-                if (!configuration.Cvr.CvrConfigurationId.HasValue)
+                if (configuration.Cvr.CvrConfigurationId == Guid.Empty)
                 {
                     var fakeProviderConfig = await cvrClient.CreateFakeProviderConfiguration($"sample-{Guid.NewGuid()}").ConfigureAwait(false);
                     Log.Information("Created Fake Provider configuration with name '{Name}'", fakeProviderConfig.Name);
