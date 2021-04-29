@@ -69,16 +69,19 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 }
 
                 CvrProviderConfigurationModel cvrProvider;
-                if (configuration.Cvr.CvrConfigurationId == Guid.Empty)
+                if (!configuration.Cvr.CvrConfigurationId.HasValue)
                 {
-                    if (configs.Count > 1)
-                    {
-                        Log.Error("There is more than one CVR configuration defined for this subscription");
-                        return;
-                    }
+                    var fakeProviderConfig = await cvrClient.AddOrUpdateFakeProviderConfiguration(new AddOrUpdateFakeProviderConfigurationParameters(null, $"sample-{Guid.NewGuid()}")).ConfigureAwait(false);
+                    Log.Information("Created Fake Provider configuration with name '{Name}'", fakeProviderConfig.Name);
 
-                    cvrProvider = configs[0];
-                    configuration.Cvr.CvrConfigurationId = cvrProvider.Id.Value;
+                    cvrProvider = new CvrProviderConfigurationModel
+                    {
+                        Id = fakeProviderConfig.Id,
+                        SubscriptionId = fakeProviderConfig.SubscriptionId,
+                        Name = fakeProviderConfig.Name,
+                        Provider = "Fake Provider",
+                    };
+                    configuration.Cvr.CvrConfigurationId = fakeProviderConfig.Id.Value;
                 }
                 else
                 {
@@ -96,6 +99,11 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 var company = await cvrClient.GetCompanyByCvrAsync(configuration.CvrNumber).ConfigureAwait(false);
 
                 Log.Information("Company data: {@Company}", company);
+
+                if (cvrProvider.Provider == "Fake Provider")
+                {
+                    return;
+                }
 
                 Log.Information("Fetching company by id {Id} using configuration {Name}", company.Id, cvrProvider.Name);
 
