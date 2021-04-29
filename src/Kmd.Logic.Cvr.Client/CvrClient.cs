@@ -19,7 +19,7 @@ namespace Kmd.Logic.Cvr.Client
     /// - Create a CVR configuration for the distribution service being used.
     /// </remarks>
     [SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "HttpClient is not owned by this class.")]
-    public sealed class CvrClient
+    public sealed partial class CvrClient
     {
         private readonly HttpClient _httpClient;
         private readonly CvrOptions _options;
@@ -296,10 +296,19 @@ namespace Kmd.Logic.Cvr.Client
         }
 
         /// <summary>
+        /// Switch CVR client scope to new configuration.
+        /// </summary>
+        /// <param name="configurationId">New configuration ID.</param>
+        public void SwitchConfiguration(Guid configurationId)
+        {
+            this._options.CvrConfigurationId = configurationId;
+        }
+
+        /// <summary>
         /// Gets or Intialize the instance of the <see cref="InternalClient"/> class.
         /// </summary>
         /// <returns>The instance of KMDLogicCVRServiceServiceAPI.</returns>
-        internal InternalClient CreateClient()
+        private InternalClient CreateClient()
         {
             if (this._internalClient != null)
             {
@@ -314,11 +323,6 @@ namespace Kmd.Logic.Cvr.Client
             };
 
             return this._internalClient;
-        }
-
-        internal CvrOptions GetOptions()
-        {
-            return this._options;
         }
     }
 }
