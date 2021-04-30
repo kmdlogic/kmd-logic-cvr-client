@@ -26,7 +26,9 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         /// <param name="environment">Possible values include: 'Production',
         /// 'Test'</param>
+#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
         public CvrFakeProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string))
+#pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
         {
             Id = id;
             SubscriptionId = subscriptionId;
