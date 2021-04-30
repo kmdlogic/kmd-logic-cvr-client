@@ -17,8 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fake", "fake", "{E4CC60C1-C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client", "src\Kmd.Logic.Cvr.Client\Kmd.Logic.Cvr.Client.csproj", "{63DDA49B-BF5B-4C7B-B850-42016761AA53}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{CFEB0CA5-9990-4A4F-85EC-37189A0659F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client.Sample", "sample\Kmd.Logic.Cvr.Client.Sample\Kmd.Logic.Cvr.Client.Sample.csproj", "{DCF57759-D612-48F9-A128-5F535FEAACC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{760F3657-8A64-4FFC-9FF9-2B7A8CE9BCA5}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		CHANGES.md = CHANGES.md
@@ -28,8 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{CF
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.Cvr.Client.Sample", "sample\Kmd.Logic.Cvr.Client.Sample\Kmd.Logic.Cvr.Client.Sample.csproj", "{DCF57759-D612-48F9-A128-5F535FEAACC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

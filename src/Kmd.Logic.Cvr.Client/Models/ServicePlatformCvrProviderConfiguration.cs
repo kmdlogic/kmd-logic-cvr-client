@@ -24,13 +24,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// Initializes a new instance of the
         /// ServicePlatformCvrProviderConfiguration class.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="subscriptionId"></param>
-        /// <param name="name"></param>
-        /// <param name="certificateFileName"></param>
-        /// <param name="environment">Possible values include: 'Production', 'Test'</param>
-        /// <param name="municipalityCvr"></param>
-        public ServicePlatformCvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string), string municipalityCvr = default(string))
+        /// <param name="environment">Possible values include: 'Production',
+        /// 'Test'</param>
+#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
+        public ServicePlatformCvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string), string municipalityCvr = default(string), System.Guid? serviceAgreementUuid = default(System.Guid?), System.Guid? userSystemUuid = default(System.Guid?), System.Guid? userUuid = default(System.Guid?))
+#pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
         {
             Id = id;
             SubscriptionId = subscriptionId;
@@ -38,6 +36,9 @@ namespace Kmd.Logic.Cvr.Client.Models
             CertificateFileName = certificateFileName;
             Environment = environment;
             MunicipalityCvr = municipalityCvr;
+            ServiceAgreementUuid = serviceAgreementUuid;
+            UserSystemUuid = userSystemUuid;
+            UserUuid = userUuid;
             CustomInit();
         }
 
@@ -76,6 +77,21 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "municipalityCvr")]
         public string MunicipalityCvr { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceAgreementUuid")]
+        public System.Guid? ServiceAgreementUuid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "userSystemUuid")]
+        public System.Guid? UserSystemUuid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "userUuid")]
+        public System.Guid? UserUuid { get; set; }
 
     }
 }

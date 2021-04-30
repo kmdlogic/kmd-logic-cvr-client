@@ -7,6 +7,7 @@
 namespace Kmd.Logic.Cvr.Client.Models
 {
     using Newtonsoft.Json;
+    using System.Linq;
 
     public partial class Company
     {
