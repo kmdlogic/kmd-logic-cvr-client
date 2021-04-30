@@ -24,7 +24,6 @@ namespace Kmd.Logic.Cvr.Client
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
-            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
 
             var client = this.CreateClient();
             using (var response = await client.CreateDataDistributorCvrConfigurationWithHttpMessagesAsync(

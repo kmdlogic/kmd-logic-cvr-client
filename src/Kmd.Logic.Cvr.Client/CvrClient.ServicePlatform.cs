@@ -30,7 +30,6 @@ namespace Kmd.Logic.Cvr.Client
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (certificate is null) throw new ArgumentNullException(nameof(certificate));
-            if (string.IsNullOrEmpty(certificatePassword)) throw new ArgumentNullException(nameof(certificatePassword));
             if (serviceAgreementUuid == Guid.Empty) throw new ArgumentNullException(nameof(serviceAgreementUuid));
             if (userSystemUuid == Guid.Empty) throw new ArgumentNullException(nameof(userSystemUuid));
             if (userUuid == Guid.Empty) throw new ArgumentNullException(nameof(userUuid));
