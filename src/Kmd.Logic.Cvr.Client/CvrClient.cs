@@ -19,7 +19,7 @@ namespace Kmd.Logic.Cvr.Client
     /// - Create a CVR configuration for the distribution service being used.
     /// </remarks>
     [SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "HttpClient is not owned by this class.")]
-    public sealed partial class CvrClient
+    public sealed partial class CvrClient : IDisposable
     {
         private readonly HttpClient _httpClient;
         private readonly CvrOptions _options;
@@ -323,6 +323,13 @@ namespace Kmd.Logic.Cvr.Client
             };
 
             return this._internalClient;
+        }
+
+        public void Dispose()
+        {
+            this._httpClient?.Dispose();
+            this._tokenProviderFactory?.Dispose();
+            this._internalClient?.Dispose();
         }
     }
 }
