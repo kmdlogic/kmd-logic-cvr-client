@@ -149,13 +149,21 @@ namespace Kmd.Logic.Cvr.Client.Sample
 
                 Log.Information("Fetching events for subscribed companies using configuration {Name}", cvrProvider.Name);
                 var page = 1;
-                var fetchedEventsCount = 0;
-                while (fetchedEventsCount == 0)
+                var isEventsExist = true;
+                while (isEventsExist)
                 {
                     var subscribedEvents = await cvrClient.GetSubscribedCompanyEventsAsync(DateTime.Now.AddMonths(-2), DateTime.Today, page, 100).ConfigureAwait(false);
-                    fetchedEventsCount = subscribedEvents.Events.Count;
+                    isEventsExist = subscribedEvents.ActualCount > 0;
                     Log.Information("Fetched {Amount} company subscribed events", subscribedEvents.Events.Count);
                     page++;
+                }
+
+                var companyToUnSubscribe = company.Id;
+                bool success = await cvrClient.UnsubscribeByIdAsync(companyToUnSubscribe).ConfigureAwait(false);
+
+                if (success)
+                {
+                    Log.Information("Unsubscribed from company events with object id {ObjectId}", companyToUnSubscribe);
                 }
             }
         }
