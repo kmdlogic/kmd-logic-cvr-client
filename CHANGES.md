@@ -1,3 +1,6 @@
+1.8.0
+* Return null when object does not exist.
+
 1.7.0
 * Add or update configuration methods for all providers.
 
