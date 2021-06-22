@@ -159,6 +159,8 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return (ProductionUnitDetail)response.Body;
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
@@ -186,6 +188,8 @@ namespace Kmd.Logic.Cvr.Client
                 {
                     case System.Net.HttpStatusCode.OK:
                         return (ProductionUnitDetail)response.Body;
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
                     default:
                         throw new CvrConfigurationException(response.Body as string ?? "Invalid configuration provided to access CVR service");
                 }
