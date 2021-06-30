@@ -1,3 +1,7 @@
+2.0.0
+* Make client assembly strongly named
+* Make client assembly versioned
+
 1.8.0
 * Return null when object does not exist.
 
