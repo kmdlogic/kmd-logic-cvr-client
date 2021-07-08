@@ -321,7 +321,7 @@ namespace Kmd.Logic.Cvr.Client
 
             var tokenProvider = this._tokenProviderFactory.GetProvider(this._httpClient);
 
-            this._internalClient = new InternalClient(new TokenCredentials(tokenProvider))
+            this._internalClient = new InternalClient(new TokenCredentials(tokenProvider), this._httpClient, false)
             {
                 BaseUri = this._options.CvrServiceUri,
             };
