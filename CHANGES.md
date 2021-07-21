@@ -1,3 +1,6 @@
+2.0.1
+* Allow client class to accepted ITokenProviderFactory 
+
 2.0.0
 * Make client assembly strongly named
 * Make client assembly versioned
