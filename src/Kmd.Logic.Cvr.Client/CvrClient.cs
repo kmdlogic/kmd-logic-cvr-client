@@ -33,7 +33,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name="httpClient">The HTTP client to use. The caller is expected to manage this resource and it will not be disposed.</param>
         /// <param name="tokenProviderFactory">The Logic access token provider factory.</param>
         /// <param name="options">The required configuration options.</param>
-        public CvrClient(HttpClient httpClient, LogicTokenProviderFactory tokenProviderFactory, CvrOptions options)
+        public CvrClient(HttpClient httpClient, ITokenProviderFactory tokenProviderFactory, CvrOptions options)
         {
             this._httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             this._options = options ?? throw new ArgumentNullException(nameof(options));
