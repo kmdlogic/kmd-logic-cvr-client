@@ -4,12 +4,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
-    <NoWarn>$(NoWarn);CS1591;CA1812;SA1309;SA1600;SA1633;SA1200;SA1202;SA1201;CA1016;CA1303</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;CA1812;SA1309;SA1600;SA1633;SA1200;SA1202;SA1201;CA1016;CA1303;CS1573</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
     <Description>A client library for KMD Logic CVR</Description>
-    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.1</VersionPrefix>
+    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.2</VersionPrefix>
     <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
     <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     <Authors>KMD</Authors>
