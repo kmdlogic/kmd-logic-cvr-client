@@ -1,3 +1,6 @@
+2.0.2
+* Company details and extended address to accomodate changes in service contract
+
 2.0.1
 * Allow client class to accept ITokenProviderFactory 
 

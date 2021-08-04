@@ -1,4 +1,4 @@
-autorest --input-file=cvr.swagger.json --output-folder=. --namespace=Kmd.Logic.Cvr.Client --csharp --override-client-name=InternalClient --add-credentials
+autorest --input-file=cvr.swagger.json --output-folder=. --namespace=Kmd.Logic.Cvr.Client --csharp --override-client-name=InternalClient --add-credentials --legacy
 
 (Get-Content "InternalClient.cs") |
 	Foreach-Object {$_ -replace 'public partial class InternalClient', 'internal partial class InternalClient'} | 

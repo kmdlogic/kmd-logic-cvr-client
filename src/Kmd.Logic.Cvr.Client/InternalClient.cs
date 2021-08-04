@@ -1329,21 +1329,27 @@ namespace Kmd.Logic.Cvr.Client
         /// </return>
         public async Task<HttpOperationResponse<object>> GetEventsWithHttpMessagesAsync(System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (pageNo > 2147483647)
+            if (pageNo != null)
             {
-                throw new ValidationException(ValidationRules.InclusiveMaximum, "pageNo", 2147483647);
+                if (pageNo > 2147483647)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMaximum, "pageNo", 2147483647);
+                }
+                if (pageNo < 1)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMinimum, "pageNo", 1);
+                }
             }
-            if (pageNo < 1)
+            if (pageSize != null)
             {
-                throw new ValidationException(ValidationRules.InclusiveMinimum, "pageNo", 1);
-            }
-            if (pageSize > 100000)
-            {
-                throw new ValidationException(ValidationRules.InclusiveMaximum, "pageSize", 100000);
-            }
-            if (pageSize < 1)
-            {
-                throw new ValidationException(ValidationRules.InclusiveMinimum, "pageSize", 1);
+                if (pageSize > 100000)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMaximum, "pageSize", 100000);
+                }
+                if (pageSize < 1)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMinimum, "pageSize", 1);
+                }
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1534,21 +1540,27 @@ namespace Kmd.Logic.Cvr.Client
         /// </return>
         public async Task<HttpOperationResponse<object>> GetSubscribedEventsWithHttpMessagesAsync(System.Guid subscriptionId, System.DateTime dateFrom, System.DateTime dateTo, System.Guid? configurationId = default(System.Guid?), int? pageNo = default(int?), int? pageSize = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (pageNo > 2147483647)
+            if (pageNo != null)
             {
-                throw new ValidationException(ValidationRules.InclusiveMaximum, "pageNo", 2147483647);
+                if (pageNo > 2147483647)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMaximum, "pageNo", 2147483647);
+                }
+                if (pageNo < 1)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMinimum, "pageNo", 1);
+                }
             }
-            if (pageNo < 1)
+            if (pageSize != null)
             {
-                throw new ValidationException(ValidationRules.InclusiveMinimum, "pageNo", 1);
-            }
-            if (pageSize > 100000)
-            {
-                throw new ValidationException(ValidationRules.InclusiveMaximum, "pageSize", 100000);
-            }
-            if (pageSize < 1)
-            {
-                throw new ValidationException(ValidationRules.InclusiveMinimum, "pageSize", 1);
+                if (pageSize > 100000)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMaximum, "pageSize", 100000);
+                }
+                if (pageSize < 1)
+                {
+                    throw new ValidationException(ValidationRules.InclusiveMinimum, "pageSize", 1);
+                }
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;

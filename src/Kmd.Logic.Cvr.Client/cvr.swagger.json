@@ -1200,6 +1200,9 @@
     "CvrAddress": {
       "type": "object",
       "properties": {
+        "publicRegistryId": {
+          "type": "string"
+        },
         "streetCode": {
           "type": "string"
         },
@@ -1207,6 +1210,15 @@
           "type": "string"
         },
         "houseNumber": {
+          "type": "string"
+        },
+        "floor": {
+          "type": "string"
+        },
+        "room": {
+          "type": "string"
+        },
+        "citySubDivision": {
           "type": "string"
         },
         "communityCode": {
@@ -1219,6 +1231,23 @@
           "type": "string"
         },
         "countryCode": {
+          "type": "string"
+        }
+      }
+    },
+    "CvrCompanyDetails": {
+      "type": "object",
+      "properties": {
+        "businessStartDate": {
+          "type": "string"
+        },
+        "registrationFrom": {
+          "type": "string"
+        },
+        "registrationTo": {
+          "type": "string"
+        },
+        "status": {
           "type": "string"
         }
       }
@@ -1256,6 +1285,9 @@
         },
         "cvrAddress": {
           "$ref": "#/definitions/CvrAddress"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CvrCompanyDetails"
         }
       }
     },

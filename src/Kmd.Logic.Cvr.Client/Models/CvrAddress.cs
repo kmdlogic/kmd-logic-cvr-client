@@ -22,11 +22,15 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// <summary>
         /// Initializes a new instance of the CvrAddress class.
         /// </summary>
-        public CvrAddress(string streetCode = default(string), string streetName = default(string), string houseNumber = default(string), string communityCode = default(string), string postCode = default(string), string postDistrict = default(string), string countryCode = default(string))
+        public CvrAddress(string publicRegistryId = default(string), string streetCode = default(string), string streetName = default(string), string houseNumber = default(string), string floor = default(string), string room = default(string), string citySubDivision = default(string), string communityCode = default(string), string postCode = default(string), string postDistrict = default(string), string countryCode = default(string))
         {
+            PublicRegistryId = publicRegistryId;
             StreetCode = streetCode;
             StreetName = streetName;
             HouseNumber = houseNumber;
+            Floor = floor;
+            Room = room;
+            CitySubDivision = citySubDivision;
             CommunityCode = communityCode;
             PostCode = postCode;
             PostDistrict = postDistrict;
@@ -38,6 +42,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "publicRegistryId")]
+        public string PublicRegistryId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,6 +62,21 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "houseNumber")]
         public string HouseNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "floor")]
+        public string Floor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "room")]
+        public string Room { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "citySubDivision")]
+        public string CitySubDivision { get; set; }
 
         /// <summary>
         /// </summary>

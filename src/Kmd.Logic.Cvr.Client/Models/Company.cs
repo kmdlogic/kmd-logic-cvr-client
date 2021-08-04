@@ -24,9 +24,7 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         /// <param name="id">The company object Id. This may differ between
         /// providers.</param>
-#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
-        public Company(string id = default(string), string cvrNumber = default(string), string companyName = default(string), string phoneNumber = default(string), string eMailAddress = default(string), string mainBusinessCode = default(string), string mainBusinessDescription = default(string), string businessTypeCode = default(string), string dataProvider = default(string), CvrAddress cvrAddress = default(CvrAddress))
-#pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
+        public Company(string id = default(string), string cvrNumber = default(string), string companyName = default(string), string phoneNumber = default(string), string eMailAddress = default(string), string mainBusinessCode = default(string), string mainBusinessDescription = default(string), string businessTypeCode = default(string), string dataProvider = default(string), CvrAddress cvrAddress = default(CvrAddress), CvrCompanyDetails companyDetails = default(CvrCompanyDetails))
         {
             Id = id;
             CvrNumber = cvrNumber;
@@ -38,6 +36,7 @@ namespace Kmd.Logic.Cvr.Client.Models
             BusinessTypeCode = businessTypeCode;
             DataProvider = dataProvider;
             CvrAddress = cvrAddress;
+            CompanyDetails = companyDetails;
             CustomInit();
         }
 
@@ -97,6 +96,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "cvrAddress")]
         public CvrAddress CvrAddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "companyDetails")]
+        public CvrCompanyDetails CompanyDetails { get; set; }
 
     }
 }
