@@ -333,7 +333,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CvrFakeProviderConfiguration>> CreateFakeProviderConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<FakeCvrConfigurationResponseModel>> CreateFakeProviderConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='subscriptionId'>
         /// </param>
@@ -347,7 +347,43 @@ namespace Kmd.Logic.Cvr.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CvrFakeProviderConfiguration>> UpdateFakeProviderConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<FakeCvrConfigurationResponseModel>> UpdateFakeProviderConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Custom Data sets for cvr fake provider
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// </param>
+        /// <param name='configurationId'>
+        /// </param>
+        /// <param name='companyData'>
+        /// </param>
+        /// <param name='productionUnitData'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<FakeCvrConfigurationResponseModel>> SaveDataWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, Stream companyData = default(Stream), Stream productionUnitData = default(Stream), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Custom Event Data sets for cvr fake provider
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// </param>
+        /// <param name='configurationId'>
+        /// </param>
+        /// <param name='eventsData'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<FakeCvrConfigurationResponseModel>> SaveEventDataWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, Stream eventsData = default(Stream), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='subscriptionId'>
         /// </param>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -59,6 +60,9 @@ namespace Kmd.Logic.Cvr.Client.Sample
             using var httpClient = new HttpClient();
             using var tokenProviderFactory = new LogicTokenProviderFactory(configuration.TokenProvider);
             using var cvrClient = new CvrClient(httpClient, tokenProviderFactory, configuration.Cvr);
+            using FileStream companyDataAsStream = File.OpenRead("CvrCompanyDetails.json");
+            using FileStream productionUnitDataAsStream = File.OpenRead("CvrProductionUnitData.json");
+            using FileStream companyEventsDataAsStream = File.OpenRead("CompanyEventsData.json");
 
             var configs = await cvrClient.GetAllCvrConfigurationsAsync().ConfigureAwait(false);
             if (configs == null || configs.Count == 0)
@@ -93,16 +97,21 @@ namespace Kmd.Logic.Cvr.Client.Sample
                 }
             }
 
+            Log.Information("Uploading company details  and production unit details");
+            var updateFakeCompanyDetails = await cvrClient.UpdateFakeProviderConfigurationWithData(configuration.Cvr.CvrConfigurationId, companyDataAsStream, productionUnitDataAsStream).ConfigureAwait(false);
+            Log.Information("Uploading company events details", configuration.CvrNumber, cvrProvider.Name);
+            var updateFakeCompanyEvents = await cvrClient.UpdateFakeProviderConfigurationWithEventsData(configuration.Cvr.CvrConfigurationId, companyEventsDataAsStream).ConfigureAwait(false);
+
             Log.Information("Fetching {Cvr} using configuration {Name}", configuration.CvrNumber, cvrProvider.Name);
 
             var company = await cvrClient.GetCompanyByCvrAsync(configuration.CvrNumber).ConfigureAwait(false);
 
             Log.Information("Company data: {@Company}", company);
 
-            if (cvrProvider.Provider == "Fake Provider")
-            {
-                return;
-            }
+            //if (cvrProvider.Provider == "FakeProvider")
+            //{
+            //    return;
+            //}
 
             Log.Information("Fetching company by id {Id} using configuration {Name}", company.Id, cvrProvider.Name);
 

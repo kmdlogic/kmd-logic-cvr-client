@@ -1,0 +1,22 @@
+﻿[
+  {
+    "Id": "35533730",
+    "cvrNumber": "35533729",
+    "companyName": "Koch LLC",
+    "phoneNumber": "310-568-2922 x53104",
+    "emailAddress": "Jordan83@hotmail.com",
+    "mainBusinessCode": "246710",
+    "mainBusinessDescription": "Markedsanalyse og offentlig meningsmåling",
+    "businessTypeCode": "244",
+    "dataProvider": "DST",
+    "cvrAddress": {
+      "streetCode": "250",
+      "streetName": "Ewell Row",
+      "houseNumber": "14762",
+      "communityCode": "176",
+      "postCode": "3400",
+      "postDistrict": "Clarabellefurt",
+      "countryCode": "TC"
+    }
+  }
+]

@@ -871,7 +871,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CvrFakeProviderConfiguration"
+              "$ref": "#/definitions/FakeCvrConfigurationResponseModel"
             }
           },
           "400": {
@@ -924,7 +924,118 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CvrFakeProviderConfiguration"
+              "$ref": "#/definitions/FakeCvrConfigurationResponseModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/fake-provider/{configurationId}/data": {
+      "put": {
+        "tags": [
+          "FakeProviderConfiguration"
+        ],
+        "summary": "Custom Data sets for cvr fake provider",
+        "operationId": "SaveData",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "companyData",
+            "in": "formData",
+            "type": "file"
+          },
+          {
+            "name": "productionUnitData",
+            "in": "formData",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FakeCvrConfigurationResponseModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/cvr/configurations/fake-provider/{configurationId}/eventsdata": {
+      "put": {
+        "tags": [
+          "FakeProviderConfiguration"
+        ],
+        "summary": "Custom Event Data sets for cvr fake provider",
+        "operationId": "SaveEventData",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "eventsData",
+            "in": "formData",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FakeCvrConfigurationResponseModel"
             }
           },
           "400": {
@@ -1359,9 +1470,6 @@
         "name": {
           "type": "string"
         },
-        "certificateFileName": {
-          "type": "string"
-        },
         "environment": {
           "type": "string"
         },
@@ -1393,9 +1501,6 @@
         "name": {
           "type": "string"
         },
-        "certificateFileName": {
-          "type": "string"
-        },
         "environment": {
           "type": "string",
           "enum": [
@@ -1405,7 +1510,7 @@
         }
       }
     },
-    "CvrFakeProviderConfiguration": {
+    "FakeCvrConfigurationResponseModel": {
       "type": "object",
       "properties": {
         "id": {
@@ -1419,15 +1524,17 @@
         "name": {
           "type": "string"
         },
-        "certificateFileName": {
+        "companyDataFileName": {
+          "type": "string"
+        },
+        "productionUnitDataFileName": {
+          "type": "string"
+        },
+        "companyEventsDataFileName": {
           "type": "string"
         },
         "environment": {
-          "type": "string",
-          "enum": [
-            "Production",
-            "Test"
-          ]
+          "type": "string"
         }
       }
     },
@@ -1445,15 +1552,15 @@
         "name": {
           "type": "string"
         },
-        "certificateFileName": {
-          "type": "string"
-        },
         "environment": {
           "type": "string",
           "enum": [
             "Production",
             "Test"
           ]
+        },
+        "certificateFileName": {
+          "type": "string"
         },
         "municipalityCvr": {
           "type": "string"
