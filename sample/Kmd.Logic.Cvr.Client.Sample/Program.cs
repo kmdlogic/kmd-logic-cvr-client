@@ -108,11 +108,6 @@ namespace Kmd.Logic.Cvr.Client.Sample
 
             Log.Information("Company data: {@Company}", company);
 
-            //if (cvrProvider.Provider == "FakeProvider")
-            //{
-            //    return;
-            //}
-
             Log.Information("Fetching company by id {Id} using configuration {Name}", company.Id, cvrProvider.Name);
 
             var companyById = await cvrClient.GetCompanyByIdAsync(company.Id).ConfigureAwait(false);
