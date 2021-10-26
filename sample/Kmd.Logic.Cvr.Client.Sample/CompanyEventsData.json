@@ -1,0 +1,105 @@
+﻿[
+  {
+    "Id": 149952737,
+    "Message": {
+      "BasicDataMessage": {
+        "EventNotification": {
+          "MessageVersion": "1.0",
+          "MessageId": "1519189f-9bda-41bb-9b9a-c436fb806377",
+          "MessageEnvelope": {
+            "FilteringData": {
+              "MessageType": "ProduktionsenhedCreate",
+              "MessageResponsibleActor": "",
+              "ObjectDetection": [
+                {
+                  "EventDateTime": "2020-11-16T12:18:20.453821Z",
+                  "Status": "inaktiv",
+                  "ObjectId": "33866941",
+                  "ObjectType": "Produktionsenhed",
+                  "ObjectAction": "Ophoert",
+                  "TaskTopic": "34.10.25.05"
+                }
+              ]
+            },
+            "DeliveryInformation": {
+              "FormationTime": "2020-11-16T13:18:15.0601460+01:00",
+              "SourceSystem": "http://data.gov.dk/id/itsystem/basicdata#d45f25737a3972bd68ec2d9f043bb7e479fc1b6f",
+              "SecurityClassification": "http://data.gov.dk/vocabulary/security/confidentiality#NonConfidential"
+            }
+          },
+          "MessageData": [
+            {
+              "ObjectData": {
+                "Incident": {
+                  "ProductionUnit": {
+                    "Pnumber": "1024810344",
+                    "ProductionUnitStartDate": "2020-08-27",
+                    "ProductionUnitTerminationDate": "2020-09-30",
+                    "Id": "4010427449",
+                    "DeviceType": "produktionsenhed",
+                    "BusinessEvent": "Ophoert",
+                    "BusinessKeyType": "pnummer22",
+                    "Businesskey": "1024810344",
+                    "Status": "aktiv"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "Format": "Json",
+    "Timestamp": "2020-11-16T12:18:19.885321Z"
+  },
+  {
+    "Id": 149952741,
+    "Message": {
+      "BasicDataMessage": {
+        "EventNotification": {
+          "MessageVersion": "1.0",
+          "MessageId": "67add9cb-b699-4820-bbe3-8e1ef41d8896",
+          "MessageEnvelope": {
+            "FilteringData": {
+              "MessageType": "NavnCreate",
+              "MessageResponsibleActor": "",
+              "ObjectDetection": [
+                {
+                  "EventDateTime": "2022-10-19T09:39:19.820Z",
+                  "Status": "Aktiv",
+                  "ObjectId": "4010427449",
+                  "ObjectType": "Navn",
+                  "ObjectAction": "Aendret",
+                  "TaskTopic": "34.10.25.05"
+                }
+              ]
+            },
+            "DeliveryInformation": {
+              "FormationTime": "2020-11-16T12:18:20.453821Z",
+              "SourceSystem": "http://data.gov.dk/id/itsystem/basicdata#d45f25737a3972bd68ec2d9f043bb7e479fc1b6f",
+              "SecurityClassification": "http://data.gov.dk/vocabulary/security/confidentiality#NonConfidential"
+            }
+          },
+          "MessageData": [
+            {
+              "ObjectData": {
+                "Incident": {
+                  "Name": {
+                    "Value": "Test af EVr 2020 I/S",
+                    "EffectFrom": "2020-08-27",
+                    "EffectTo": "2020-09-30",
+                    "CVRUnitId": "4010427449",
+                    "BusinessEvent": "Aendret",
+                    "Status": "aktiv"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "Format": "Json",
+    "Timestamp": "2020-11-16T12:18:20.911472Z"
+  }
+]

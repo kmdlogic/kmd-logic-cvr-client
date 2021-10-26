@@ -24,14 +24,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         /// <param name="environment">Possible values include: 'Production',
         /// 'Test'</param>
-#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
-        public CvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string))
-#pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
+        public CvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string environment = default(string))
         {
             Id = id;
             SubscriptionId = subscriptionId;
             Name = name;
-            CertificateFileName = certificateFileName;
             Environment = environment;
             CustomInit();
         }
@@ -55,11 +52,6 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "certificateFileName")]
-        public string CertificateFileName { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Production', 'Test'

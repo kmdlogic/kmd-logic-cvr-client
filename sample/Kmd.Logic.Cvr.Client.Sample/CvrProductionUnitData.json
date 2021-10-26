@@ -1,0 +1,72 @@
+﻿[
+  {
+    "id": "0c3b6b36-a302-480c-9235-96aead16e7e8",
+    "pNumber": "1089377678",
+    "cvrNumber": "33866941",
+    "productionUnitName": "Jobcentret-test",
+    "phoneNumber": "841-514-4357",
+    "emailAddress": "update@hotmail.com",
+    "locationAddress": {
+      "streetCode": "104",
+      "streetName": "Hermann Courts",
+      "houseNumber": "48658",
+      "communityCode": "273",
+      "postCode": "1415",
+      "postDistrict": "New Patriciabury",
+      "countryCode": "MK"
+    },
+    "lineOfIndustries": {
+      "mainBusiness": {
+        "branchCode": "54246",
+        "name": "Skolefritidsordninger og fritidshjem"
+      },
+      "biBranch1": {
+        "branchCode": "42201",
+        "name": "Generelle offentlige tjenester"
+      },
+      "biBranch2": {
+        "branchCode": "10487",
+        "name": "Computer facility management"
+      },
+      "biBranch3": {
+        "branchCode": "28696",
+        "name": "Aldersintegrerede institutioner"
+      }
+    }
+  },
+  {
+    "id": "6f31c11b-036d-4111-893a-b7fca067a39b",
+    "pNumber": "1089377675",
+    "cvrNumber": "20700211",
+    "productionUnitName": "Jobcentret",
+    "phoneNumber": "841-514-4357",
+    "emailAddress": "Alexie_Altenwerth80@hotmail.com",
+    "locationAddress": {
+      "streetCode": "104",
+      "streetName": "Hermann Courts",
+      "houseNumber": "48658",
+      "communityCode": "273",
+      "postCode": "1415",
+      "postDistrict": "New Patriciabury",
+      "countryCode": "MK"
+    },
+    "lineOfIndustries": {
+      "mainBusiness": {
+        "branchCode": "54246",
+        "name": "Skolefritidsordninger og fritidshjem"
+      },
+      "biBranch1": {
+        "branchCode": "42201",
+        "name": "Generelle offentlige tjenester"
+      },
+      "biBranch2": {
+        "branchCode": "10487",
+        "name": "Computer facility management"
+      },
+      "biBranch3": {
+        "branchCode": "28696",
+        "name": "Aldersintegrerede institutioner"
+      }
+    }
+  }
+]

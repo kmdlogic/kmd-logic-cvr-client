@@ -665,7 +665,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static CvrFakeProviderConfiguration CreateFakeProviderConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name)
+            public static FakeCvrConfigurationResponseModel CreateFakeProviderConfiguration(this IInternalClient operations, System.Guid subscriptionId, string name)
             {
                 return operations.CreateFakeProviderConfigurationAsync(subscriptionId, name).GetAwaiter().GetResult();
             }
@@ -680,7 +680,7 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrFakeProviderConfiguration> CreateFakeProviderConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<FakeCvrConfigurationResponseModel> CreateFakeProviderConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateFakeProviderConfigurationWithHttpMessagesAsync(subscriptionId, name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -697,7 +697,7 @@ namespace Kmd.Logic.Cvr.Client
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static CvrFakeProviderConfiguration UpdateFakeProviderConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name)
+            public static FakeCvrConfigurationResponseModel UpdateFakeProviderConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name)
             {
                 return operations.UpdateFakeProviderConfigurationAsync(subscriptionId, configurationId, name).GetAwaiter().GetResult();
             }
@@ -714,9 +714,93 @@ namespace Kmd.Logic.Cvr.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CvrFakeProviderConfiguration> UpdateFakeProviderConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<FakeCvrConfigurationResponseModel> UpdateFakeProviderConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateFakeProviderConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, name, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Custom Data sets for cvr fake provider
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// </param>
+            /// <param name='configurationId'>
+            /// </param>
+            /// <param name='companyData'>
+            /// </param>
+            /// <param name='productionUnitData'>
+            /// </param>
+            public static FakeCvrConfigurationResponseModel SaveData(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, Stream companyData = default(Stream), Stream productionUnitData = default(Stream))
+            {
+                return operations.SaveDataAsync(subscriptionId, configurationId, companyData, productionUnitData).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Custom Data sets for cvr fake provider
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// </param>
+            /// <param name='configurationId'>
+            /// </param>
+            /// <param name='companyData'>
+            /// </param>
+            /// <param name='productionUnitData'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<FakeCvrConfigurationResponseModel> SaveDataAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, Stream companyData = default(Stream), Stream productionUnitData = default(Stream), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SaveDataWithHttpMessagesAsync(subscriptionId, configurationId, companyData, productionUnitData, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Custom Event Data sets for cvr fake provider
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// </param>
+            /// <param name='configurationId'>
+            /// </param>
+            /// <param name='eventsData'>
+            /// </param>
+            public static FakeCvrConfigurationResponseModel SaveEventData(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, Stream eventsData = default(Stream))
+            {
+                return operations.SaveEventDataAsync(subscriptionId, configurationId, eventsData).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Custom Event Data sets for cvr fake provider
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// </param>
+            /// <param name='configurationId'>
+            /// </param>
+            /// <param name='eventsData'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<FakeCvrConfigurationResponseModel> SaveEventDataAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, Stream eventsData = default(Stream), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SaveEventDataWithHttpMessagesAsync(subscriptionId, configurationId, eventsData, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

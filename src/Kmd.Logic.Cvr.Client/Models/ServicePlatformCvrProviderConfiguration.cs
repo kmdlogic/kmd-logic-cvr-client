@@ -26,15 +26,13 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// </summary>
         /// <param name="environment">Possible values include: 'Production',
         /// 'Test'</param>
-#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
-        public ServicePlatformCvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string certificateFileName = default(string), string environment = default(string), string municipalityCvr = default(string), System.Guid? serviceAgreementUuid = default(System.Guid?), System.Guid? userSystemUuid = default(System.Guid?), System.Guid? userUuid = default(System.Guid?))
-#pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
+        public ServicePlatformCvrProviderConfiguration(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), string environment = default(string), string certificateFileName = default(string), string municipalityCvr = default(string), System.Guid? serviceAgreementUuid = default(System.Guid?), System.Guid? userSystemUuid = default(System.Guid?), System.Guid? userUuid = default(System.Guid?))
         {
             Id = id;
             SubscriptionId = subscriptionId;
             Name = name;
-            CertificateFileName = certificateFileName;
             Environment = environment;
+            CertificateFileName = certificateFileName;
             MunicipalityCvr = municipalityCvr;
             ServiceAgreementUuid = serviceAgreementUuid;
             UserSystemUuid = userSystemUuid;
@@ -63,15 +61,15 @@ namespace Kmd.Logic.Cvr.Client.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "certificateFileName")]
-        public string CertificateFileName { get; set; }
-
-        /// <summary>
         /// Gets or sets possible values include: 'Production', 'Test'
         /// </summary>
         [JsonProperty(PropertyName = "environment")]
         public string Environment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "certificateFileName")]
+        public string CertificateFileName { get; set; }
 
         /// <summary>
         /// </summary>
