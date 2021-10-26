@@ -13,7 +13,7 @@ namespace Kmd.Logic.Cvr.Client
         /// <remarks>
         /// This option should not be overridden except for testing purposes.
         /// </remarks>
-        public Uri CvrServiceUri { get; set; } = new Uri("https://gateway.kmdlogic.io/cvr/v1");
+        public Uri CvrServiceUri { get; set; } = new Uri("https://localhost:44307");
 
         /// <summary>
         /// Gets or sets the Logic Subscription.
