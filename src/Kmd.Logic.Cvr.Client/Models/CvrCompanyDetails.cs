@@ -22,9 +22,10 @@ namespace Kmd.Logic.Cvr.Client.Models
         /// <summary>
         /// Initializes a new instance of the CvrCompanyDetails class.
         /// </summary>
-        public CvrCompanyDetails(string businessStartDate = default(string), string registrationFrom = default(string), string registrationTo = default(string), string status = default(string))
+        public CvrCompanyDetails(string businessStartDate = default(string), string cessationDate = default(string), string registrationFrom = default(string), string registrationTo = default(string), string status = default(string))
         {
             BusinessStartDate = businessStartDate;
+            CessationDate = cessationDate;
             RegistrationFrom = registrationFrom;
             RegistrationTo = registrationTo;
             Status = status;
@@ -41,6 +42,11 @@ namespace Kmd.Logic.Cvr.Client.Models
         [JsonProperty(PropertyName = "businessStartDate")]
         public string BusinessStartDate { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "cessationDate")]
+        public string CessationDate { get; set; }
+        
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "registrationFrom")]

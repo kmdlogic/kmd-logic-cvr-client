@@ -1352,6 +1352,9 @@
         "businessStartDate": {
           "type": "string"
         },
+        "cessationDate": {
+          "type": "string"
+        },
         "registrationFrom": {
           "type": "string"
         },
