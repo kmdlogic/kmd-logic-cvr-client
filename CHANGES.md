@@ -1,5 +1,7 @@
 2.0.4
 * Extended company details by cessationDate property
+
+
 2.0.3
 * Updated CVR client for fake provoider configuration put endpoints to accept company details, production unit details
 * Updated CVR client for new endpoints added to update company events details.
